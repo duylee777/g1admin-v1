@@ -17,5 +17,17 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('admin.dashboard');
+});
+Route::get('/login', function () {
+    return view('admin.auth.login');
+});
+Route::get('/forgot-password', function () {
+    return view('admin.auth.forgot_password');
+});
+Route::get('/reset-password', function () {
+    return view('admin.auth.reset_password');
+});
+Route::get('/position', function () {
+    return view('admin.position.index');
 });
