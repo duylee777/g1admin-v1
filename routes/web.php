@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\RoleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,5 +48,6 @@ Route::prefix('admin') -> group(function () {
     Route::get('/logout', [AdminController::class, 'logout'])->name('admin.logout');
     Route::group(['middleware' => 'user'], function() {
         Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+        Route::resource('/role', RoleController::class);
     });
 });

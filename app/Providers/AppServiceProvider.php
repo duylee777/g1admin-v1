@@ -27,7 +27,9 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
         View::composer('*', function ($view) {
-            $view->with('authUserData', User::where('id','=',auth()->id())->first());
+            if(Auth::guard('user')->check()) {
+                $view->with('authUserData', User::where('id','=',auth()->guard('user')->id())->first());
+            }        
         });
     }
 }
