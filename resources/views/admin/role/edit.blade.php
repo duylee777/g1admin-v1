@@ -25,14 +25,14 @@
                 <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
                 </svg>
-                <span class="ms-1 text-sm font-medium text-gray-500 md:ms-2 dark:text-gray-400">Thêm vai trò mới</span>
+                <span class="ms-1 text-sm font-medium text-gray-500 md:ms-2 dark:text-gray-400">Cập nhật vai trò: {{ $role->name }}</span>
             </div>
         </li>
     </ol>
 </nav>
 
 <section class="bg-gray-50 dark:bg-gray-900 py-4 sm:py-5 mt-5">
-    <h2 class=" mx-4 mb-4 text-xl font-bold text-gray-900 dark:text-white">Thêm vai trò mới</h2>
+    <h2 class=" mx-4 mb-4 text-xl font-bold text-yellow-300">Cập nhật vai trò: <span class="text-gray-900">{{ $role->name }}</span></h2>
     <form  method="POST" action="{{ route('role.update', $role->id) }}" class="px-4" enctype="multipart/form-data">
         @csrf
         @method('PUT')
@@ -65,8 +65,8 @@
             </div>
         </div>
         <div class="text-right">
-            <button type="submit" class="px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 hover:bg-blue-800">
-            Thêm vai trò
+            <button type="submit" class="px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-white bg-yellow-300 rounded-lg focus:ring-4 focus:ring-blue-200 hover:bg-yellow-400">
+            Cập nhật
             </button>
         </div>
     </form>

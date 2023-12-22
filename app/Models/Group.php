@@ -9,8 +9,10 @@ class Group extends Model
 {
     use HasFactory;
 
+    // public $table = "group";
+
     protected $fillable = [
-        'id', 'name'
+        'id','code', 'name','role_id'
     ];
 
     public function users(){
