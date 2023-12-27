@@ -5,6 +5,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,10 +49,13 @@ Route::prefix('admin') -> group(function () {
     Route::get('/login', [AdminController::class, 'login'])->name('admin.login');
     Route::post('/login', [AdminController::class, 'loginPost'])->name('admin.loginPost');
     Route::get('/logout', [AdminController::class, 'logout'])->name('admin.logout');
-    Route::group(['middleware' => 'user'], function() {
+   
+
+    Route::middleware('superadmin')->group(function () {
         Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
         Route::resource('/role', RoleController::class);
         Route::resource('/group', GroupController::class);
         Route::resource('/permission', PermissionController::class);
+        Route::resource('/user', UserController::class);
     });
 });

@@ -22,6 +22,9 @@ class User extends Authenticatable
         'username',
         'email',
         'password',
+        'phone',
+        'address',
+        'avatar',
     ];
 
     /**
@@ -51,5 +54,18 @@ class User extends Authenticatable
     public function groups(){
         return $this->belongsToMany(Group::class,'user_group');
     }
+
+    // public function isSuperAdmin(){
+    //     if ($this->roles()->type=="super_admin"){
+    //         return true;
+    //     }
+    //     return false;
+    // }
+    // public function isAdmin(){
+    //     if ($this->roles()->type=="admin"){
+    //         return true;
+    //     }
+    //     return false;
+    // }
     
 }

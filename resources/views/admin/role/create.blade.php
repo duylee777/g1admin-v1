@@ -35,9 +35,13 @@
     <h2 class=" mx-4 mb-4 text-xl font-bold text-gray-900 dark:text-white">Thêm vai trò mới</h2>
     <form  method="POST" action="{{ route('role.store') }}" class="px-4">
         @csrf
-        <div class="">
+        <div class="flex flex-col gap-4">
             <div class="sm:col-span-2">
-                <label for="name" class="block mb-4 font-semibold text-gray-900 dark:text-white">Tên vai trò</label>
+                <label for="type" class="block mb-2 font-semibold text-gray-900 dark:text-white">Loại vai trò</label>
+                <input type="text" name="type" id="type" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" placeholder="Nhập loại vai trò ..." required="">
+            </div>
+            <div class="sm:col-span-2">
+                <label for="name" class="block mb-2 font-semibold text-gray-900 dark:text-white">Tên vai trò</label>
                 <input type="text" name="name" id="name" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" placeholder="Nhập tên vai trò ..." required="">
             </div>
         </div>

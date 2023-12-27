@@ -17,11 +17,15 @@ class AdminController extends Controller
 
     public function loginPost(Request $request){
         $credentials = $request->only('username', 'password');
-        if(Auth::guard('user')->attempt($credentials)) {
+        $isSuperAdmin = Auth::guard('superadmin')->attempt($credentials);
+        $isUser = Auth::guard('user')->attempt($credentials);
+        if($isSuperAdmin) {
+            return view('admin.super-admin-dashboard');
+        }else if($isUser){
             return redirect()->route('admin.dashboard');
         }else{
             return redirect()->route('admin.login')->withErrors(['msg' => 'Error !!!']);
-        }
+        }    
     }
 
     public function dashboard(){

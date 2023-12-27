@@ -43,9 +43,12 @@
                     <input type="text" name="role_id" id="role_id" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" placeholder="" required="" value="{{ $role->id }}" disabled>
                 </div>
                 <div class="sm:col-span-2">
+                    <label for="type" class="block mb-4 font-semibold text-gray-900 dark:text-white">Loại</label>
+                    <input type="text" name="type" id="type" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" placeholder="" required="" value="{{ $role->type }}">
+                </div>
+                <div class="sm:col-span-2">
                     <label for="name" class="block mb-4 font-semibold text-gray-900 dark:text-white">Tên vai trò</label>
                     <input type="text" name="name" id="name" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" placeholder="" required="" value="{{ $role->name }}">
-                    
                 </div>
             </div>
             <div class="">
