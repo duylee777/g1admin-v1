@@ -2,9 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\SpecTypeController;
 use App\Http\Controllers\UserController;
 
 /*
@@ -21,27 +24,11 @@ use App\Http\Controllers\UserController;
 Route::get('/', function () {
     return view('welcome');
 });
-// Route::get('/dashboard', function () {
-//     $name = Route::getRoutes();
-//     $route_name = [];
-//     foreach ($name as $name) {
-//         $action = $name->getAction();
-//         if (array_key_exists('as', $action)) {
-//             $route_name[] = $action['as'];
-//         }
-//     }
-//     return view('admin.dashboard', compact('route_name'));
-    
-// })->name('ss');
-
 Route::get('/forgot-password', function () {
     return view('admin.auth.forgot_password');
 });
 Route::get('/reset-password', function () {
     return view('admin.auth.reset_password');
-});
-Route::get('/position', function () {
-    return view('admin.position.index');
 });
 
 Route::prefix('admin') -> group(function () {
@@ -57,5 +44,8 @@ Route::prefix('admin') -> group(function () {
         Route::resource('/group', GroupController::class);
         Route::resource('/permission', PermissionController::class);
         Route::resource('/user', UserController::class);
+        Route::resource('/category', CategoryController::class);
+        Route::resource('/product', ProductController::class);
+        Route::resource('/spec-type', SpecTypeController::class);
     });
 });

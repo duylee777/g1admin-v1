@@ -45,7 +45,7 @@
         </svg>
         Quay lại
     </a>
-    <h1 class="mx-4 mb-4 text-2xl font-semibold text-blue-500">Chi tiết hồ sơ</h1>
+    <h1 class="mx-4 mb-4 text-2xl font-semibold text-blue-600">Chi tiết hồ sơ</h1>
     <div class="p-4 mx-4 flex items-center gap-4 bg-white border border-gray-200 rounded shadow">
         <div class="w-24 h-24 overflow-hidden flex items-center justify-center rounded-lg shadow">
             <img class="w-full" src="{{asset('../storage/users/'.$user->username.'/'.$user->avatar)}}" alt="Extra large avatar">
