@@ -2,12 +2,14 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SpecTypeController;
+use App\Http\Controllers\TagController;
 use App\Http\Controllers\UserController;
 
 /*
@@ -47,5 +49,7 @@ Route::prefix('admin') -> group(function () {
         Route::resource('/category', CategoryController::class);
         Route::resource('/product', ProductController::class);
         Route::resource('/spec-type', SpecTypeController::class);
+        Route::resource('/tag', TagController::class);
+        Route::resource('/article', ArticleController::class);
     });
 });

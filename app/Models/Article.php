@@ -1,0 +1,25 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Article extends Model
+{
+    use HasFactory;
+
+    public $table = "articles";
+
+    protected $fillable = [
+        'category_id', 'title', 'slug', 'description', 'detail', 'status', 'image'
+    ];
+
+    public function category(){
+        return $this->belongsTo(Category::class);
+    }
+
+    public function tags(){
+        return $this->belongsToMany(Tag::class,'article_tag','article_id', 'tag_id');
+    }
+}

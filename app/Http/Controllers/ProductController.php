@@ -214,7 +214,7 @@ class ProductController extends Controller
 
             foreach($request->file('document_file_input') as $inputDocument) {
                 $documentName = time().'_'.$inputDocument->getClientOriginalName();
-                $linkStorage = "public/documents/".$request->code."/";
+                $linkStorage = "public/documents/".$product->code."/";
                 $inputDocument->storeAs($linkStorage, $documentName);
                 $listDoumentName[] =  $documentName;
             }
@@ -229,7 +229,7 @@ class ProductController extends Controller
 
             foreach($request->file('software_file_input') as $inputSoftware) {
                 $softwareName = time().'_'.$inputSoftware->getClientOriginalName();
-                $linkStorage = "public/softwares/".$request->code."/";
+                $linkStorage = "public/softwares/".$product->code."/";
                 $inputSoftware->storeAs($linkStorage, $softwareName);
                 $listSoftwareName[] =  $softwareName;
             }
