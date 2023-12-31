@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProductController;
@@ -23,15 +24,25 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('/forgot-password', function () {
-    return view('admin.auth.forgot_password');
-});
-Route::get('/reset-password', function () {
-    return view('admin.auth.reset_password');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+// Route::get('/forgot-password', function () {
+//     return view('admin.auth.forgot_password');
+// });
+// Route::get('/reset-password', function () {
+//     return view('admin.auth.reset_password');
+// });
+
+Route::get('/', [HomeController::class, 'home'])->name('theme.home');
+Route::get('/gioi-thieu', [HomeController::class, 'about'])->name('theme.about');
+Route::get('/danh-muc/{slug_category?}', [HomeController::class, 'category'])->name('theme.category');
+Route::get('/san-pham/{slug_category}/{slug_product?}', [HomeController::class, 'productDetail'])->name('theme.product_detail');
+Route::get('/du-an', [HomeController::class, 'project'])->name('theme.project');
+Route::get('/du-an/{slug_project?}', [HomeController::class, 'projectDetail'])->name('theme.project_detail');
+Route::get('/tin-tuc', [HomeController::class, 'news'])->name('theme.news');
+Route::get('/tin-tuc/{slug_news?}', [HomeController::class, 'newsDetail'])->name('theme.news_detail');
+
 
 Route::prefix('admin') -> group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('admin.index');

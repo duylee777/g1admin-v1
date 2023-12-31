@@ -1,0 +1,19 @@
+.breadcrumb-area {
+    background-color: var(--bg__grey--light);
+    padding: 1rem 0;
+}
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    margin-top: 0;
+}
+.breadcrumb span:last-child {
+    color: var(--text-color__red);
+}
+.breadcrumb a {
+    color: var(--text-color__black);
+}
+.breadcrumb a:hover {
+    text-decoration: underline;
+}

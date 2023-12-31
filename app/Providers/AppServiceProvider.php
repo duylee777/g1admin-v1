@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use App\Models\User;
 use App\Models\SuperAdmin;
+use App\Models\Category;
+use Illuminate\Pagination\Paginator;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -16,7 +19,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        // Paginator::useBootstrap();
+       
     }
 
     /**
@@ -25,11 +29,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Schema::defaultStringLength(191);
-        // View::composer('*', function ($view) {
-        //     if(Auth::guard('user')->check()) {
-        //         $view->with('authUserData', User::where('id','=',auth()->guard('user')->id())->first());
-        //     }        
-        // });
         View::composer('*', function ($view) {
             $isSuperAdmin = Auth::guard('superadmin')->check();
             $isUser = Auth::guard('user')->check();
@@ -39,6 +38,7 @@ class AppServiceProvider extends ServiceProvider
             if($isUser) {
                 $view->with('authUserData', User::where('id','=',auth()->guard('user')->id())->first());
             } 
+
         });
     }
 }

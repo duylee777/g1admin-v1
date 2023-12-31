@@ -20,7 +20,7 @@ class AdminController extends Controller
         $isSuperAdmin = Auth::guard('superadmin')->attempt($credentials);
         $isUser = Auth::guard('user')->attempt($credentials);
         if($isSuperAdmin) {
-            return view('admin.super-admin-dashboard');
+            return redirect()->route('admin.dashboard');
         }else if($isUser){
             return redirect()->route('admin.dashboard');
         }else{

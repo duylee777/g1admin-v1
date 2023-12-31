@@ -12,10 +12,19 @@ class Category extends Model
     public $table = "categories";
 
     protected $fillable = [
+        'id',
         'slug',
         'name',
         'email',
         'description',
         'parent_id',
     ];
+
+    public function childs() {
+        return $this->hasMany(Category::class,'parent_id','id') ;
+    }
+    public function parent()
+    {
+        return $this->belongsTo(Category::class,'parent_id');
+    }
 }
