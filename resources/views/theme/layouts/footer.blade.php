@@ -12,7 +12,7 @@
             </div>
             <div class="f-logo">
                 <a href="">
-                    <img src="assets/imgs/logo/phoenixaudio_logo.png" alt="">
+                    <img src="{{ asset('assets/theme/imgs/logo/phoenixaudio_logo.png') }}" alt="">
                 </a>
             </div>
             <div class="footer-wrap">

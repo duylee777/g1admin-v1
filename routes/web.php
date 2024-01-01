@@ -42,6 +42,10 @@ Route::get('/du-an', [HomeController::class, 'project'])->name('theme.project');
 Route::get('/du-an/{slug_project?}', [HomeController::class, 'projectDetail'])->name('theme.project_detail');
 Route::get('/tin-tuc', [HomeController::class, 'news'])->name('theme.news');
 Route::get('/tin-tuc/{slug_news?}', [HomeController::class, 'newsDetail'])->name('theme.news_detail');
+Route::get('/dai-ly', [HomeController::class, 'dealer'])->name('theme.dealer');
+Route::get('/ho-tro', [HomeController::class, 'support'])->name('theme.support');
+Route::get('/lien-he', [HomeController::class, 'contact'])->name('theme.contact');
+Route::post('/lien-he', [HomeController::class, 'contactPost'])->name('theme.contact_post');
 
 
 Route::prefix('admin') -> group(function () {

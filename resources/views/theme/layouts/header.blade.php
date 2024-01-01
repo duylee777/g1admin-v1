@@ -10,13 +10,13 @@
                     </a>
                 </div>
                 <nav class="mainmenu">
-                    <a href="about.html" class="mainmenu__link">Giới thiệu</a>
-                    <a href="project.html" class="mainmenu__link">Dự án</a>
-                    <a href="blog.html" class="mainmenu__link">Tin tức</a>
-                    <a href="agency.html" class="mainmenu__link">Đại lý</a>
-                    <a href="support.html" class="mainmenu__link">Hỗ trợ</a>
-                    <a href="support.html" class="mainmenu__link">Tải về</a>
-                    <a href="contact.html" class="mainmenu__link">Liên hệ</a>
+                    <a id="show-about" href="#" class="mainmenu__link">Giới thiệu</a>
+                    <a href="{{ route('theme.project') }}" class="mainmenu__link">Dự án</a>
+                    <a href="{{ route('theme.news') }}" class="mainmenu__link">Tin tức</a>
+                    <a href="{{ route('theme.dealer') }}" class="mainmenu__link">Đại lý</a>
+                    <a href="{{ route('theme.support') }}" class="mainmenu__link">Hỗ trợ</a>
+                    <a href="{{ route('theme.support') }}" class="mainmenu__link">Tải về</a>
+                    <a href="{{ route('theme.contact') }}" class="mainmenu__link">Liên hệ</a>
                 </nav>
                 <div class="searchbar">
                     <form action="">
@@ -49,89 +49,44 @@
                         <div class="offcanvas-body">
                             <nav class="m-mainmenu">
                                 <a href="{{ route('theme.about') }}" class="mainmenu__link m-mainmenu__link">Giới thiệu</a>
-                                <a href="project.html" class="mainmenu__link m-mainmenu__link">Dự án</a>
-                                <a href="blog.html" class="mainmenu__link m-mainmenu__link">Tin tức</a>
-                                <a href="agency.html" class="mainmenu__link m-mainmenu__link">Đại lý</a>
-                                <a href="support.html" class="mainmenu__link m-mainmenu__link">Hỗ trợ</a>
-                                <a href="support.html" class="mainmenu__link m-mainmenu__link">Tải về</a>
-                                <a href="contact.html" class="mainmenu__link m-mainmenu__link">Liên hệ</a>
+                                <a href="{{ route('theme.project') }}" class="mainmenu__link m-mainmenu__link">Dự án</a>
+                                <a href="{{ route('theme.news') }}" class="mainmenu__link m-mainmenu__link">Tin tức</a>
+                                <a href="{{ route('theme.dealer') }}" class="mainmenu__link m-mainmenu__link">Đại lý</a>
+                                <a href="{{ route('theme.support') }}" class="mainmenu__link m-mainmenu__link">Hỗ trợ</a>
+                                <a href="{{ route('theme.support') }}" class="mainmenu__link m-mainmenu__link">Tải về</a>
+                                <a href="{{ route('theme.contact') }}" class="mainmenu__link m-mainmenu__link">Liên hệ</a>
                             </nav>
                             <div class="m-product-portfolio-wrap">
                                 <button id="toggleMenuMobileBtn"><i class="fa-solid fa-bars-staggered"></i> <span>Danh mục sản phẩm</span></button>
                                 <div class="m-product-portfolio-toggle">
-                                    <ul class="m-product-portfolio">
-                                        <li class="m-product-wrap">
-                                            <div class="m-product">
-                                                <a href="" class="m-product__link">Line Array</a>
-                                                <span class="m-product__btn-toggle"><i class="fa-solid fa-angle-down"></i></span>
-                                            </div>
-                                            <ul class="m-sub-product-portfolio">
-                                                <li class="m-sub-product-wrap">
-                                                    <div class="m-sub-product">
-                                                        <a href="" class="m-sub-product__link">Line Array DMX</a>
-                                                    </div>
-                                                </li>
-                                                <li class="m-sub-product-wrap">
-                                                    <div class="m-sub-product">
-                                                        <a href="" class="m-sub-product__link">Line Array NEXO</a>
-                                                    </div>
-                                                </li>
-                                                <li class="m-sub-product-wrap">
-                                                    <div class="m-sub-product">
-                                                        <a href="" class="m-sub-product__link">Line Array Adamson</a>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li class="m-product-wrap">
-                                            <div class="m-product">
-                                                <a href="" class="m-product__link">Loa / Speaker</a>
-                                                <span class="m-product__btn-toggle"><i class="fa-solid fa-angle-down"></i></span>
-                                            </div>
-                                        </li>
-                                        <li class="m-product-wrap">
-                                            <div class="m-product">
-                                                <a href="" class="m-product__link">Công suất / Amplifier</a>
-                                                <span class="m-product__btn-toggle"><i class="fa-solid fa-angle-down"></i></span>
-                                            </div>
-                                        </li>
-                                        <li class="m-product-wrap">
-                                            <div class="m-product">
-                                                <a href="" class="m-product__link">Microphone</a>
-                                                <span class="m-product__btn-toggle"><i class="fa-solid fa-angle-down"></i></span>
-                                            </div>
-                                        </li>
-                                        <li class="m-product-wrap">
-                                            <div class="m-product">
-                                                <a href="" class="m-product__link">Vang / Mixer</a>
-                                                <span class="m-product__btn-toggle"><i class="fa-solid fa-angle-down"></i></span>
-                                            </div>
-                                        </li>
-                                        <li class="m-product-wrap">
-                                            <div class="m-product">
-                                                <a href="" class="m-product__link">Loa trầm / Sub</a>
-                                                <span class="m-product__btn-toggle"><i class="fa-solid fa-angle-down"></i></span>
-                                            </div>
-                                        </li>
-                                        <li class="m-product-wrap">
-                                            <div class="m-product">
-                                                <a href="" class="m-product__link">Quản lý nguồn điện</a>
-                                                <span class="m-product__btn-toggle"><i class="fa-solid fa-angle-down"></i></span>
-                                            </div>
-                                        </li>
-                                        <li class="m-product-wrap">
-                                            <div class="m-product">
-                                                <a href="" class="m-product__link">Phụ kiện âm thanh</a>
-                                                <span class="m-product__btn-toggle"><i class="fa-solid fa-angle-down"></i></span>
-                                            </div>
-                                        </li>
-                                        <li class="m-product-wrap">
-                                            <div class="m-product">
-                                                <a href="" class="m-product__link">Dàn loa Karaoke</a>
-                                                <span class="m-product__btn-toggle"><i class="fa-solid fa-angle-down"></i></span>
-                                            </div>
-                                        </li>
-                                    </ul>
+                                    @if($cates != null)
+                                        <ul class="m-product-portfolio">
+                                        @foreach($cates as $cate)
+                                            @if($cate->parent_id == 11)
+                                            <li class="m-product-wrap">
+                                                <div class="m-product">
+                                                    <a href="{{ route('theme.category',$cate->slug) }}" class="m-product__link">{{$cate->name}}</a>
+                                                    @if(count($cate->childs) != 0) 
+                                                        <span class="m-product__btn-toggle"><i class="fa-solid fa-angle-down"></i></span>
+                                                    @endif
+                                                </div>
+                                                @if(count($cate->childs) != 0) 
+                                                    <ul class="m-sub-product-portfolio">
+                                                        @foreach($cate->childs as $child)
+                                                        <li class="sub-product-wrap">
+                                                            <div class="m-sub-product">
+                                                                <a href="" class="sub-product__link">{{$child->name}}</a>
+                                                            </div>
+                                                        </li>
+                                                        @endforeach
+                                                    </ul>
+                                                @endif
+                                            </li> 
+                                            @endif
+                                        @endforeach    
+                                        </ul>
+                                    @endif
+                                    
                                 </div>
                             </div>
                         </div>
@@ -205,19 +160,19 @@
                     
                 </ul>
             </div>
-            <section class="homeabout-area">
-            <div class="homeabout-wrap">
-                <div class="homeabout-title">
-                    <h2>phoenix</h2>
+            <section class="homeabout-area" style="display:none;">
+                <div class="homeabout-wrap">
+                    <div class="homeabout-title">
+                        <h2>phoenix</h2>
+                    </div>
+                    <div class="homeabout__content">
+                        <h5>Công ty Cổ phần Điện Tử và Công nghệ Phượng Hoàng</h5>
+                        <p>Công ty Cổ phần Điện Tử và Công nghệ Phượng Hoàng, tiền thân là Công ty Cổ phần Điện Tử Phượng Hoàng (Công ty Phượng Hoàng)<br>
+                        Được thành lập từ năm 2015, trải qua gần 10 năm hoạt động và phát triển, Chúng tôi  được biết đến là một trong những công ty thương mại chuyên cung cấp thiết bị âm thanh chuyên nghiệp hàng đầu Việt Nam. Chúng tôi định hướng phát triển công ty theo hướng doanh nghiệp có giá trị bền vững. Điều này dựa trên tiêu chí là luôn đảm bảo duy trì hài hòa lợi ích của công ty với khách hàng, đối tác và người lao động.</p>
+                    </div>
+                    <a href="{{ route('theme.about') }}" class="homeabout__link inner-about">Tìm hiểu thêm</a>
                 </div>
-                <div class="homeabout__content">
-                    <h5>Công ty Cổ phần Điện Tử và Công nghệ Phượng Hoàng</h5>
-                    <p>Công ty Cổ phần Điện Tử và Công nghệ Phượng Hoàng, tiền thân là Công ty Cổ phần Điện Tử Phượng Hoàng (Công ty Phượng Hoàng)<br>
-                    Được thành lập từ năm 2015, trải qua gần 10 năm hoạt động và phát triển, Chúng tôi  được biết đến là một trong những công ty thương mại chuyên cung cấp thiết bị âm thanh chuyên nghiệp hàng đầu Việt Nam. Chúng tôi định hướng phát triển công ty theo hướng doanh nghiệp có giá trị bền vững. Điều này dựa trên tiêu chí là luôn đảm bảo duy trì hài hòa lợi ích của công ty với khách hàng, đối tác và người lao động.</p>
-                </div>
-                <a href="" class="homeabout__link inner-about">Tìm hiểu thêm</a>
-            </div>
-        </section>
+            </section>
         </div>
     
     </header>

@@ -36,10 +36,17 @@
     padding: 10px 0px;
     font-size: 22px;
     color: var(--text-color__grey--semibold);
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
 }
 .img-post{
    width: 30%;
    overflow: hidden;
+   display: flex;
+   align-items: center;
+   justify-content: center;
 }
 .img-post img{
     display: block;
@@ -130,6 +137,10 @@
 }
 .excerpt {
     font-weight: 300;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
 }
 
 @media screen and (max-width: 769px) {

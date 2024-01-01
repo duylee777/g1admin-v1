@@ -69,12 +69,44 @@ class HomeController extends Controller
 
     public function news() {
         $dataView = [];
+        $categoryNews = Category::where('slug', 'tin-tuc')->first();
+        $latestNews = Article::where('category_id', $categoryNews->id)->orderBy('id', 'DESC')->take(3)->get();
+        $news = Article::where('category_id', $categoryNews->id)->orderBy('id', 'ASC')->get();
+        $dataView['news'] = $news;
+        $dataView['latestNews'] = $latestNews;
         return view('theme.news.news-list', $dataView);
     }
 
     public function newsDetail($slug_news) {
         $dataView = [];
+        $categoryNews = Category::where('slug', 'tin-tuc')->first();
+        $latestNews = Article::where('category_id', $categoryNews->id)->orderBy('id', 'DESC')->take(3)->get();
+        $newsDetail = Article::where('slug', $slug_news)->first();
+        $dataView['newsDetail'] = $newsDetail;
+        $dataView['latestNews'] = $latestNews;
         return view('theme.news.news-detail', $dataView);
+    }
+
+    public function dealer() {
+        return view('theme.dealer');
+    } 
+
+    public function support() {
+        return view('theme.support');
+    }
+
+    public function contact() {
+        return view('theme.contact');
+    }
+
+    public function contactPost(Request $request) {
+        $contact = [
+            "name" => $request->name,
+            "email" => $request->email,
+            "phone" => $request->phone,
+            "message" => $request->message,
+        ];
+        var_dump($contact);
     }
 
 }
