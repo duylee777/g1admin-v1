@@ -13,7 +13,7 @@ class CategoryController extends Controller
     public function index()
     {
         $dataView = [];
-        $categories = Category::orderBy('id', 'ASC')->paginate(5);
+        $categories = Category::orderBy('id', 'ASC')->paginate(30);
         $dataView['categories'] = $categories;
         return view('admin.category.index', $dataView);
     }

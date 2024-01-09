@@ -1,7 +1,9 @@
 @extends('theme.layouts.index')
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('./assets/theme/css/product-list.css') }}">
-    <link rel="stylesheet" href="{{ asset('./assets/theme/css/breadcrumb.css') }}">
+    <!-- <link rel="stylesheet" href="{{ asset('./assets/theme/css/product-list.css') }}">
+    <link rel="stylesheet" href="{{ asset('./assets/theme/css/breadcrumb.css') }}"> -->
+    <link rel="stylesheet" href="/assets/theme/css/product-list.css">
+    <link rel="stylesheet" href="/assets/theme/css/breadcrumb.css">
 @endpush
 @section('title','Danh sách sản phẩm')
 @section('content')

@@ -2,15 +2,22 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AgencyController;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ExtendProductController;
 use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Frontend\SearchController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProductSpecController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\SettingController;
 use App\Http\Controllers\SpecTypeController;
 use App\Http\Controllers\TagController;
+use App\Http\Controllers\UnitController;
 use App\Http\Controllers\UserController;
 
 /*
@@ -42,10 +49,12 @@ Route::get('/du-an', [HomeController::class, 'project'])->name('theme.project');
 Route::get('/du-an/{slug_project?}', [HomeController::class, 'projectDetail'])->name('theme.project_detail');
 Route::get('/tin-tuc', [HomeController::class, 'news'])->name('theme.news');
 Route::get('/tin-tuc/{slug_news?}', [HomeController::class, 'newsDetail'])->name('theme.news_detail');
-Route::get('/dai-ly', [HomeController::class, 'dealer'])->name('theme.dealer');
+Route::get('/dai-ly', [HomeController::class, 'agency'])->name('theme.agency');
 Route::get('/ho-tro', [HomeController::class, 'support'])->name('theme.support');
+Route::get('/tai-ve', [HomeController::class, 'download'])->name('theme.download');
 Route::get('/lien-he', [HomeController::class, 'contact'])->name('theme.contact');
 Route::post('/lien-he', [HomeController::class, 'contactPost'])->name('theme.contact_post');
+Route::get('/tim-kiem', [SearchController::class, 'search'])->name('theme.search');
 
 
 Route::prefix('admin') -> group(function () {
@@ -63,8 +72,16 @@ Route::prefix('admin') -> group(function () {
         Route::resource('/user', UserController::class);
         Route::resource('/category', CategoryController::class);
         Route::resource('/product', ProductController::class);
+        Route::resource('/product-spec', ProductSpecController::class);
+        Route::resource('/extend-product', ExtendProductController::class);
         Route::resource('/spec-type', SpecTypeController::class);
         Route::resource('/tag', TagController::class);
         Route::resource('/article', ArticleController::class);
+        Route::resource('/unit', UnitController::class);
+        Route::resource('/brand', BrandController::class);
+        Route::resource('/agency', AgencyController::class);
+        Route::prefix('setting')->group(function() {
+            Route::get('/', [SettingController::class, 'index'])->name('setting.index');
+        });
     });
 });

@@ -12,11 +12,17 @@ class Product extends Model
     public $table = "products";
 
     protected $fillable = [
-        'id','code', 'name', 'slug', 'description', 'images', 'category_id', 'active',
+        'id','code', 'name', 'slug', 'description', 'images', 'category_id', 'active', 'featured', 'origin', 'unit_id', 'brand_id'
     ];
 
     public function category(){
         return $this->belongsTo(Category::class);
+    }
+    public function brand(){
+        return $this->belongsTo(Brand::class);
+    }
+    public function unit(){
+        return $this->belongsTo(Unit::class);
     }
 
     public function specTypes(){

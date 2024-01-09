@@ -155,6 +155,9 @@
     }
 }
 @media screen and (max-width: 576px) {
+    .post-news-grid {
+        grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+    }
     .m-news {
         flex-direction: column;
     }

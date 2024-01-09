@@ -1,8 +1,9 @@
 <header class="header-area">
+        <div class="top-layer"></div>
         <div class="mask__top">
             <div class="header-wrap">
                 <div class="trademark">
-                    <a href="#" class="trademark__link">
+                    <a href="/" class="trademark__link">
                         <div class="trademark__logo">
                                 <!-- <img src="assets/imgs/brands/phoenix.png" alt=""> -->
                                 <img src="{{ asset('assets/theme/imgs/logo/phoenixaudio_logo.png') }}" alt="">
@@ -13,24 +14,26 @@
                     <a id="show-about" href="#" class="mainmenu__link">Giới thiệu</a>
                     <a href="{{ route('theme.project') }}" class="mainmenu__link">Dự án</a>
                     <a href="{{ route('theme.news') }}" class="mainmenu__link">Tin tức</a>
-                    <a href="{{ route('theme.dealer') }}" class="mainmenu__link">Đại lý</a>
+                    <a href="{{ route('theme.agency') }}" class="mainmenu__link">Đại lý</a>
                     <a href="{{ route('theme.support') }}" class="mainmenu__link">Hỗ trợ</a>
-                    <a href="{{ route('theme.support') }}" class="mainmenu__link">Tải về</a>
+                    <a href="{{ route('theme.download') }}" class="mainmenu__link">Tải về</a>
                     <a href="{{ route('theme.contact') }}" class="mainmenu__link">Liên hệ</a>
                 </nav>
                 <div class="searchbar">
-                    <form action="">
-                        <input type="text" placeholder="Nhập từ khóa bạn muốn tìm kiếm ...">
+                    <form method="GET" action="{{ route('theme.search') }}">
+                        
+                        <input type="text" name="keyword" placeholder="Nhập từ khóa bạn muốn tìm kiếm ...">
                         <button><i class="fa-solid fa-magnifying-glass"></i></button>
                     </form>
                 </div>
                 <div class="morewrap">
                     <div class="dropdown">
                         <button class="morewrap__btn dropdown-btn"><i class="fa-solid fa-globe"></i></button>
-                        <div class="dropdown-menu">
+                        <div class="gtranslate_wrapper dropdown-menu"></div>
+                        <!-- <div class="dropdown-menu">
                             <a href="#" class="dropdown-menu__link">English</a>
                             <a href="#" class="dropdown-menu__link">Tiếng Việt</a>
-                        </div>
+                        </div> -->
                     </div>
                     <!-- <div class="dropdown">
                         <button class="morewrap__btn dropdown-btn"><i class="fa-solid fa-circle-user"></i></button>
@@ -47,17 +50,8 @@
                             <button type="button" class="morewrap__btn" data-bs-dismiss="offcanvas" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
                         </div>
                         <div class="offcanvas-body">
-                            <nav class="m-mainmenu">
-                                <a href="{{ route('theme.about') }}" class="mainmenu__link m-mainmenu__link">Giới thiệu</a>
-                                <a href="{{ route('theme.project') }}" class="mainmenu__link m-mainmenu__link">Dự án</a>
-                                <a href="{{ route('theme.news') }}" class="mainmenu__link m-mainmenu__link">Tin tức</a>
-                                <a href="{{ route('theme.dealer') }}" class="mainmenu__link m-mainmenu__link">Đại lý</a>
-                                <a href="{{ route('theme.support') }}" class="mainmenu__link m-mainmenu__link">Hỗ trợ</a>
-                                <a href="{{ route('theme.support') }}" class="mainmenu__link m-mainmenu__link">Tải về</a>
-                                <a href="{{ route('theme.contact') }}" class="mainmenu__link m-mainmenu__link">Liên hệ</a>
-                            </nav>
                             <div class="m-product-portfolio-wrap">
-                                <button id="toggleMenuMobileBtn"><i class="fa-solid fa-bars-staggered"></i> <span>Danh mục sản phẩm</span></button>
+                                <button id="toggleMenuMobileBtn"><i class="fa-solid fa-bars-staggered"></i> <span>Danh mục sản phẩm</span><i class="fa-solid fa-chevron-down"></i></button>
                                 <div class="m-product-portfolio-toggle">
                                     @if($cates != null)
                                         <ul class="m-product-portfolio">
@@ -89,6 +83,15 @@
                                     
                                 </div>
                             </div>
+                            <nav class="m-mainmenu">
+                                <a href="{{ route('theme.about') }}" class="mainmenu__link m-mainmenu__link">Giới thiệu</a>
+                                <a href="{{ route('theme.project') }}" class="mainmenu__link m-mainmenu__link">Dự án</a>
+                                <a href="{{ route('theme.news') }}" class="mainmenu__link m-mainmenu__link">Tin tức</a>
+                                <a href="{{ route('theme.agency') }}" class="mainmenu__link m-mainmenu__link">Đại lý</a>
+                                <a href="{{ route('theme.support') }}" class="mainmenu__link m-mainmenu__link">Hỗ trợ</a>
+                                <a href="{{ route('theme.download') }}" class="mainmenu__link m-mainmenu__link">Tải về</a>
+                                <a href="{{ route('theme.contact') }}" class="mainmenu__link m-mainmenu__link">Liên hệ</a>
+                            </nav>
                         </div>
                     </div>
                     <!-- end test -->
@@ -102,33 +105,14 @@
                 </div>
                 <div class="brands">
                     <nav>
-                        <a href="" class="brands__name">
-                            <img src="{{ asset('assets/theme/imgs/brands/powersoft.png') }}" alt="" width="60">
-                        </a>
-                        <a href="" class="brands__name">
-                            <img src="{{ asset('assets/theme/imgs/brands/nova.png') }}" alt="" width="60">
-                        </a>
-                        <a href="" class="brands__name">
-                            <img src="{{ asset('assets/theme/imgs/brands/dmx1.png') }}" alt="" width="60">
-                        </a>
-                        <a href="" class="brands__name">
-                            <img src="{{ asset('assets/theme/imgs/brands/lspro.png') }}" alt="" width="60">
-                        </a>
-                        <a href="" class="brands__name">
-                            <img src="{{ asset('assets/theme/imgs/brands/magicktv.png') }}" alt="" width="60">
-                        </a>
-                        <a href="" class="brands__name">
-                            <img src="{{ asset('assets/theme/imgs/brands/phoenix.png') }}" alt="" width="60">
-                        </a>
-                        <a href="" class="brands__name">
-                            <img src="{{ asset('assets/theme/imgs/brands/nexo.png') }}" alt="" width="60">
-                        </a>
-                        <a href="" class="brands__name">
-                            <img src="{{ asset('assets/theme/imgs/brands/magicktv.png') }}" alt="" width="60">
-                        </a>
-                        <a href="" class="brands__name">
-                            <img src="{{ asset('assets/theme/imgs/brands/magicktv.png') }}" alt="" width="60">
-                        </a>
+                        @if($headerBrands)
+                            @foreach($headerBrands as $brand)
+                            <a href="" class="brands__name">
+                                <img src="{{asset('../storage/brands/'.$brand->id.'/'.$brand->image)}}" alt="" width="60">
+                            </a>
+                            @endforeach
+                        @endif
+                        
                     </nav>
                 </div>
             </div>
@@ -160,17 +144,19 @@
                     
                 </ul>
             </div>
-            <section class="homeabout-area" style="display:none;">
+            <section class="homeabout-area">
                 <div class="homeabout-wrap">
-                    <div class="homeabout-title">
-                        <h2>phoenix</h2>
+                    <div class="homeabout">
+                        <div class="homeabout-title">
+                            <h2>phoenix</h2>
+                        </div>
+                        <div class="homeabout__content">
+                            <h5>Công ty Cổ phần Điện Tử và Công nghệ Phượng Hoàng</h5>
+                            <p>Công ty Cổ phần Điện Tử và Công nghệ Phượng Hoàng, tiền thân là Công ty Cổ phần Điện Tử Phượng Hoàng (Công ty Phượng Hoàng)<br>
+                            Được thành lập từ năm 2015, trải qua gần 10 năm hoạt động và phát triển, Chúng tôi  được biết đến là một trong những công ty thương mại chuyên cung cấp thiết bị âm thanh chuyên nghiệp hàng đầu Việt Nam. Chúng tôi định hướng phát triển công ty theo hướng doanh nghiệp có giá trị bền vững. Điều này dựa trên tiêu chí là luôn đảm bảo duy trì hài hòa lợi ích của công ty với khách hàng, đối tác và người lao động.</p>
+                        </div>
+                        <a href="{{ route('theme.about') }}" class="homeabout__link inner-about">Tìm hiểu thêm</a>
                     </div>
-                    <div class="homeabout__content">
-                        <h5>Công ty Cổ phần Điện Tử và Công nghệ Phượng Hoàng</h5>
-                        <p>Công ty Cổ phần Điện Tử và Công nghệ Phượng Hoàng, tiền thân là Công ty Cổ phần Điện Tử Phượng Hoàng (Công ty Phượng Hoàng)<br>
-                        Được thành lập từ năm 2015, trải qua gần 10 năm hoạt động và phát triển, Chúng tôi  được biết đến là một trong những công ty thương mại chuyên cung cấp thiết bị âm thanh chuyên nghiệp hàng đầu Việt Nam. Chúng tôi định hướng phát triển công ty theo hướng doanh nghiệp có giá trị bền vững. Điều này dựa trên tiêu chí là luôn đảm bảo duy trì hài hòa lợi ích của công ty với khách hàng, đối tác và người lao động.</p>
-                    </div>
-                    <a href="{{ route('theme.about') }}" class="homeabout__link inner-about">Tìm hiểu thêm</a>
                 </div>
             </section>
         </div>

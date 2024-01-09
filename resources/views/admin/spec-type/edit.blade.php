@@ -54,7 +54,7 @@
         </svg>
         Quay lại
     </a>
-    <h2 class=" mx-4 mb-4 text-xl font-bold text-blue-600">Thêm loại thông số mới</h2>
+    <h2 class=" mx-4 mb-4 text-xl font-bold text-yellow-300">Cập nhật loại thông số</h2>
     <form  method="POST" action="{{ route('spec-type.update', $specType->id) }}" class="px-4" enctype="multipart/form-data">
         @csrf
         @method('PUT')
@@ -66,6 +66,27 @@
             <div class="sm:col-span-2">
                 <label for="name" class="block mb-2 font-semibold text-gray-900">Loại thông số</label>
                 <input type="text" name="name" id="name" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" value="{{ $specType->name }}">
+            </div>
+            <div class="sm:col-span-2">
+                <label for="category_id" class="block mb-2 font-semibold text-gray-900">Danh mục</label>
+                <select id="category_id" name="category_id" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
+                    @if($specType->category_id == 0)
+                        <option value="0" selected>-- Không có danh mục --</option>
+                    @else
+                        <option value="0">-- Không có danh mục --</option>
+                    @endif
+                    @if($categories != null)
+                        @foreach($categories as $category)
+                            @if($specType->category_id == $category->id)
+                                <option value="{{ $category->id }}" selected>{{ $category->name }}</option>
+                            @else
+                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            @endif
+                        @endforeach
+                    @else
+                        <option disabled>(Chưa khởi tạo danh mục)</option>
+                    @endif
+                </select>
             </div>
         </div>
         <div class="text-right">

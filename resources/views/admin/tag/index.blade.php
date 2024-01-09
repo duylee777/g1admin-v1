@@ -67,22 +67,21 @@
                                 <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $tag->id }}</th>
                                 <td class="px-4 py-3">{{ $tag->name }}</td>
                                 <td class="px-4 py-3">{{ $tag->slug }}</td>
-                                <td class="px-4 py-3 flex items-center justify-end">
-                                    <button id="data{{$tag->id}}-dropdown-button" data-dropdown-toggle="data{{$tag->id}}-dropdown" class="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none " type="button">
-                                        <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
-                                        </svg>
-                                    </button>
-                                    <div id="data{{$tag->id}}-dropdown" class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
-                                        <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="data{{$tag->id}}-dropdown-button">
-                                            <li>
-                                                <a href="{{ route('tag.edit', $tag->id) }}" class="block py-2 px-4 text-yellow-300 hover:text-white hover:bg-yellow-300">Sửa</a>
-                                            </li>
-                                        </ul>
+                                <td class="px-4 py-3 ">
+                                    <div class="flex items-center justify-end gap-4">
+                                        <a href="{{ route('tag.edit', $tag->id) }}" class="block">
+                                            <svg class="fill-yellow-300 hover:fill-yellow-600" xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512">
+                                                <path d="M471.6 21.7c-21.9-21.9-57.3-21.9-79.2 0L362.3 51.7l97.9 97.9 30.1-30.1c21.9-21.9 21.9-57.3 0-79.2L471.6 21.7zm-299.2 220c-6.1 6.1-10.8 13.6-13.5 21.9l-29.6 88.8c-2.9 8.6-.6 18.1 5.8 24.6s15.9 8.7 24.6 5.8l88.8-29.6c8.2-2.7 15.7-7.4 21.9-13.5L437.7 172.3 339.7 74.3 172.4 241.7zM96 64C43 64 0 107 0 160V416c0 53 43 96 96 96H352c53 0 96-43 96-96V320c0-17.7-14.3-32-32-32s-32 14.3-32 32v96c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32V160c0-17.7 14.3-32 32-32h96c17.7 0 32-14.3 32-32s-14.3-32-32-32H96z"/>
+                                            </svg>
+                                        </a>
                                         <form class="py-1" action="{{ route('tag.destroy', $tag->id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="w-full text-left block py-2 px-4 text-sm text-white bg-red-500 hover:bg-red-600" onclick="return confirm('Bạn chắc chắn muốn xóa ?')">Xóa</button>
+                                            <button type="submit" class="w-full text-left block text-base" onclick="return confirm('Bạn chắc chắn muốn xóa ?')">
+                                                <svg class="fill-red-300 hover:fill-red-600" xmlns="http://www.w3.org/2000/svg" height="16" width="14" viewBox="0 0 448 512">
+                                                    <path d="M32 464a48 48 0 0 0 48 48h288a48 48 0 0 0 48-48V128H32zm272-256a16 16 0 0 1 32 0v224a16 16 0 0 1 -32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1 -32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1 -32 0zM432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.7 23.7 0 0 0 -21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0 -16-16z"/>
+                                                </svg>
+                                            </button>
                                         </form>
                                     </div>
                                 </td>

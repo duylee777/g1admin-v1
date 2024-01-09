@@ -17,7 +17,7 @@ class ArticleController extends Controller
     public function index()
     {
         $dataView = [];
-        $articles = Article::orderBy('id', 'ASC')->paginate(10);
+        $articles = Article::orderBy('category_id', 'ASC')->paginate(10);
         $dataView['articles'] = $articles;
         return view('admin.article.index', $dataView);
     }

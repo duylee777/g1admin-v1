@@ -49,7 +49,7 @@
                     </div>
                 </div>
                 <!-- --------- -->
-                <div class="overflow-x-auto pb-32">
+                <div class="overflow-x-auto pb-4">
                     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                             <tr>
@@ -82,25 +82,26 @@
                                         <span class="text-xs inline-block px-2 py-1 rounded-sm text-white bg-green-300">Hoạt động</span>
                                     @endif
                                 </td>
-                                <td class="px-4 py-3 flex items-center justify-end">
-                                    <button id="data{{$article->id}}-dropdown-button" data-dropdown-toggle="data{{$article->id}}-dropdown" class="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100" type="button">
-                                        <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
+                                <td class="px-4 py-3">
+                                    <div class="flex items-center justify-end gap-4">
+                                        <a href="{{ route('article.show', $article->id) }}" class="block">
+                                        <svg class="fill-blue-300 hover:fill-blue-600" xmlns="http://www.w3.org/2000/svg" height="16" width="18" viewBox="0 0 576 512">
+                                            <path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM144 256a144 144 0 1 1 288 0 144 144 0 1 1 -288 0zm144-64c0 35.3-28.7 64-64 64c-7.1 0-13.9-1.2-20.3-3.3c-5.5-1.8-11.9 1.6-11.7 7.4c.3 6.9 1.3 13.8 3.2 20.7c13.7 51.2 66.4 81.6 117.6 67.9s81.6-66.4 67.9-117.6c-11.1-41.5-47.8-69.4-88.6-71.1c-5.8-.2-9.2 6.1-7.4 11.7c2.1 6.4 3.3 13.2 3.3 20.3z"/>
                                         </svg>
-                                    </button>
-                                    <div id="data{{$article->id}}-dropdown" class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
-                                        <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="data{{$article->id}}-dropdown-button">
-                                            <li>
-                                                <a href="{{ route('article.show', $article->id) }}" class="block py-2 px-4 text-blue-300 hover:text-white hover:bg-blue-300">Chi tiết</a>
-                                            </li>
-                                            <li>
-                                                <a href="{{ route('article.edit', $article->id) }}" class="block py-2 px-4 text-yellow-300 hover:text-white hover:bg-yellow-300">Sửa</a>
-                                            </li>
-                                        </ul>
+                                        </a>
+                                        <a href="{{ route('article.edit', $article->id) }}" class="block">
+                                            <svg class="fill-yellow-300 hover:fill-yellow-600" xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512">
+                                                <path d="M471.6 21.7c-21.9-21.9-57.3-21.9-79.2 0L362.3 51.7l97.9 97.9 30.1-30.1c21.9-21.9 21.9-57.3 0-79.2L471.6 21.7zm-299.2 220c-6.1 6.1-10.8 13.6-13.5 21.9l-29.6 88.8c-2.9 8.6-.6 18.1 5.8 24.6s15.9 8.7 24.6 5.8l88.8-29.6c8.2-2.7 15.7-7.4 21.9-13.5L437.7 172.3 339.7 74.3 172.4 241.7zM96 64C43 64 0 107 0 160V416c0 53 43 96 96 96H352c53 0 96-43 96-96V320c0-17.7-14.3-32-32-32s-32 14.3-32 32v96c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32V160c0-17.7 14.3-32 32-32h96c17.7 0 32-14.3 32-32s-14.3-32-32-32H96z"/>
+                                            </svg>
+                                        </a>
                                         <form class="py-1" action="{{ route('article.destroy', $article->id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="w-full text-left block py-2 px-4 text-sm text-white bg-red-500 hover:bg-red-600" onclick="return confirm('Bạn chắc chắn muốn xóa ?')">Xóa</button>
+                                            <button type="submit" class="w-full text-left block text-base" onclick="return confirm('Bạn chắc chắn muốn xóa ?')">
+                                                <svg class="fill-red-300 hover:fill-red-600" xmlns="http://www.w3.org/2000/svg" height="16" width="14" viewBox="0 0 448 512">
+                                                    <path d="M32 464a48 48 0 0 0 48 48h288a48 48 0 0 0 48-48V128H32zm272-256a16 16 0 0 1 32 0v224a16 16 0 0 1 -32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1 -32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1 -32 0zM432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.7 23.7 0 0 0 -21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0 -16-16z"/>
+                                                </svg>
+                                            </button>
                                         </form>
                                     </div>
                                 </td>

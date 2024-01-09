@@ -1,7 +1,9 @@
 @extends('theme.layouts.index')
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('./assets/theme/css/contact.css') }}">
-    <link rel="stylesheet" href="{{ asset('./assets/theme/css/breadcrumb.css') }}">
+    <!-- <link rel="stylesheet" href="{{ asset('./assets/theme/css/contact.css') }}">
+    <link rel="stylesheet" href="{{ asset('./assets/theme/css/breadcrumb.css') }}"> -->
+    <link rel="stylesheet" href="/assets/theme/css/contact.css">
+    <link rel="stylesheet" href="/assets/theme/css/breadcrumb.css">
 @endpush
 @section('title','Liên hệ')
 @section('content')
@@ -31,8 +33,8 @@
             </div>
         </div>
         <div class="contactpage-form-wrap">
-            <form method="POST" action="{{ route('theme.contact_post') }}" class="contactpage-form">
-                @csrf
+            <form method="" action="" class="contactpage-form">
+                
                 <div class="contactpage-form__item">
                     <label for="name">Tên</label>
                     <input type="text" id="name" name="name" placeholder="Nhập tên ..." required>
@@ -50,7 +52,7 @@
                     <textarea name="message" id="message" cols="30" rows="5" placeholder="Nhập thông điệp của bạn ..." required></textarea>
                 </div>
                 <div class="contactpage-form-btn">
-                    <button type="submit">Gửi</button>
+                    <button type="submit" class="contactpage-btn">Gửi</button>
                 </div>
             </form>
         </div>
@@ -60,6 +62,49 @@
     <div class="contactpage-maps">
         <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d931.3295967207595!2d105.76048861158327!3d20.979870758898908!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjDCsDU4JzQ4LjQiTiAxMDXCsDQ1JzM5LjYiRQ!5e0!3m2!1svi!2s!4v1700991792090!5m2!1svi!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
-    
 </section>
+<script>
+    $(document).ready(function() {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $(".contactpage-btn").click(function(e) {
+            e.preventDefault();
+
+            var name = $("#name").val();
+            var email = $("#email").val();
+            var phone = $("#phone").val();
+            var message = $("#message").val();
+
+            $.ajax({
+                type: 'POST',
+                url: "{{ route('theme.contact_post') }}",
+                data: {
+                    "name":name, 
+                    "email": email, 
+                    "phone": phone,
+                    "message": message
+                },
+                success: function() {
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Your work has been saved",
+                        showConfirmButton: false,
+                        timer: 1500
+                    }).then(function () {
+                            location.reload();
+                        });
+                    
+                },
+                error: function() {
+                    alert('Thông tin chưa được gửi đi !');
+                }
+            })
+        });
+    });
+</script>
 @endsection

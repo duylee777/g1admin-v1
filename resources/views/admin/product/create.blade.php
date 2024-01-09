@@ -49,33 +49,47 @@
     <h2 class=" mx-4 mb-4 text-xl font-bold text-blue-600">Thêm sản phẩm mới</h2>
     <form  method="POST" action="{{ route('product.store') }}" class="px-4" enctype="multipart/form-data">
         @csrf
-        <div class="flex flex-col gap-4">
-            <div class="sm:col-span-2">
+        <div class="grid grid-rows-2 lg:grid-cols-2 gap-4">
+            <div class="">
                 <label for="code" class="block mb-2 font-semibold text-gray-900">Mã sản phẩm</label>
                 <input type="text" name="code" id="code" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" placeholder="Nhập mã sản phẩm ..." required="">
             </div>
-            <div class="sm:col-span-2">
+            <div class="">
                 <label for="name" class="block mb-2 font-semibold text-gray-900">Tên sản phẩm</label>
                 <input type="text" name="name" id="name" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" placeholder="Nhập tên sản phẩm ..." required="">
             </div>
-            <div class="sm:col-span-2">
+            <!-- <div class="">
                 <label for="slug" class="block mb-2 font-semibold text-gray-900">Slug</label>
                 <input type="text" name="slug" id="slug" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" placeholder="Nhập slug ..." required="">
-            </div>
-            <div class="sm:col-span-2">
+            </div> -->
+            <div class="">
                 <label for="active" class="block mb-2 font-semibold text-gray-900">Trạng thái</label>
-                <div class="flex gap-4 items-center">
+                <!-- <div class="flex gap-4 items-center">
                     <input type="radio" name="active" value="1">Hoạt động
                     <input type="radio" name="active" value="0">Không hoạt động
-                </div>
+                </div> -->
+                <label class="relative inline-flex items-center me-5 cursor-pointer">
+                    <input type="checkbox" name="active" value="1" class="sr-only peer" checked>
+                    <div class="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-green-300 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all  peer-checked:bg-green-600"></div>
+                    <span class="ms-3 text-sm font-medium text-gray-200 peer-checked:text-gray-900">Hoạt động</span>
+                </label>
             </div>
-            <div class="sm:col-span-2">
-                <label for="description" class="block mb-2 font-semibold text-gray-900">Mô tả</label>
-                <textarea name="description" id="description" cols="" rows="3" class="ckeditor w-full focus:shadow-soft-primary-outline text-sm leading-5.6 ease-soft block appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 transition-all focus:border-fuchsia-300 focus:outline-none focus:transition-shadow" placeholder="Nhập mô tả ..."></textarea>
+            <div class="">
+                <label for="featured" class="block mb-2 font-semibold text-gray-900">Sản phẩm nổi bật</label>
+                <!-- <div class="flex gap-4 items-center">
+                    <input type="radio" name="featured" value="1">Có
+                    <input type="radio" name="featured" value="0">Không
+                </div> -->
+                <label class="relative inline-flex items-center me-5 cursor-pointer">
+                    <input type="checkbox" name="featured" value="1" class="sr-only peer">
+                    <div class="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-green-300 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all  peer-checked:bg-green-600"></div>
+                    <span class="ms-3 text-sm font-medium text-gray-200 peer-checked:text-gray-900">Nổi bật</span>
+                </label>
             </div>
-            <div class="sm:col-span-2">
+            
+            <div class="">
                 <label for="category_id" class="block mb-2 font-semibold text-gray-900">Danh mục</label>
-                <select id="category_id" name="category_id" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
+                <select id="category_id" name="category_id" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " onchange="test(this);">
                     <option value="0" selected>-- Không có danh mục --</option>
                     @if($categories != null)
                         @foreach($categories as $category)
@@ -86,6 +100,41 @@
                     @endif
                 </select>
             </div>
+            <div class="">
+                <label for="brand_id" class="block mb-2 font-semibold text-gray-900">Thương hiệu</label>
+                <select id="brand_id" name="brand_id" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
+                    <option value="0" selected>-- Không có thương hiệu --</option>
+                    @if($brands != null)
+                        @foreach($brands as $brand)
+                            <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+                            
+                        @endforeach
+                    @else
+                        <option disabled>(Chưa khởi tạo thương hiệu)</option>
+                    @endif
+                </select>
+            </div>
+            <div class="">
+                <label for="origin" class="block mb-2 font-semibold text-gray-900">Xuất xứ</label>
+                <input type="text" name="origin" id="origin" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" placeholder="Nhập xuất xứ ..." required="">
+            </div>
+            <div class="">
+                <label for="unit_id" class="block mb-2 font-semibold text-gray-900">Đơn vị tính</label>
+                <select id="unit_id" name="unit_id" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
+                    <option value="0" selected>-- Không có đơn vị tính --</option>
+                    @if($units != null)
+                        @foreach($units as $unit)
+                            <option value="{{ $unit->id }}">{{ $unit->name }}</option>
+                        @endforeach
+                    @else
+                        <option disabled>(Chưa khởi tạo đơn vị tính)</option>
+                    @endif
+                </select>
+            </div>
+            <div class="sm:col-span-2">
+                <label for="description" class="block mb-2 font-semibold text-gray-900">Mô tả</label>
+                <textarea name="description" id="description" cols="" rows="3" class="ckeditor w-full focus:shadow-soft-primary-outline text-sm leading-5.6 ease-soft block appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 transition-all focus:border-fuchsia-300 focus:outline-none focus:transition-shadow" placeholder="Nhập mô tả ..."></textarea>
+            </div>
             <div class="sm:col-span-2">
                 <label for="images" class="block mb-2 font-semibold text-gray-900">Ảnh sản phẩm</label>
                 <div id="list-product-image" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
@@ -94,56 +143,6 @@
                     <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none" aria-describedby="file_input_help" name="images[]" id="file_input" type="file" multiple>
                     <p class="text-sm text-gray-500" id="file_input_help">SVG, PNG, JPG or GIF (MAX. 800x400px).</p>
                 </div>
-            </div>
-            <div class="sm:col-span-2">
-                <label for="category_id" class="block mb-2 font-semibold text-gray-900">Thông số kỹ thuật</label>
-                <table class="w-full text-sm text-left rtl:text-right text-gray-500 ">
-                    <thead class="text-xs text-gray-700 uppercase bg-gray-200">
-                        <tr>
-                            <th scope="col" class="px-6 py-4 border-r border-gray-300">Loại thông số kỹ thuật</th>
-                            <th scope="col" class="px-6 py-4">Giá trị</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($specTypes as $specType)
-                        <tr class="bg-white border-b ">
-                            <th scope="row" class="px-6 py-2 font-medium text-gray-900 whitespace-nowrap border-r">{{ $specType->name }}</th>
-                            <td class="px-6 py-2">
-                                <input type="text" name="spectype_{{ $specType->id }}" id="spectype_{{ $specType->id }}" class="bg-white border-none text-gray-900 text-sm focus:ring-blue-600 focus:border-blue-600 block w-full" placeholder="Nhập giá trị ...">
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-            <div class="sm:col-span-2">
-                <label for="category_id" class="block mb-2 font-semibold text-gray-900">Tài liệu và Phần mềm</label>
-                <table class="w-full text-sm text-left rtl:text-right text-gray-500 ">
-                    <thead class="text-xs text-gray-700 uppercase bg-gray-200">
-                        <tr>
-                            <th scope="col" class="px-6 py-4 border-r border-gray-300">Tài liệu</th>
-                            <th scope="col" class="px-6 py-4">Phần mềm</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="bg-white border-b ">
-                            <td class="px-6 py-2 border-r">
-                                <div class="flex flex-col gap-2 mt-4">
-                                    <label class="block text-sm font-medium text-gray-900" for="document_file_input">Tải tập tin lên</label>
-                                    <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none" aria-describedby="document_file_input_help" name="document_file_input[]" id="document_file_input" type="file" multiple>
-                                    <p class="text-sm text-gray-500" id="document_file_input_help">PDF</p>
-                                </div>
-                            </td>
-                            <td class="px-6 py-2">
-                                <div class="flex flex-col gap-2 mt-4">
-                                    <label class="block text-sm font-medium text-gray-900" for="software_file_input">Tải tập tin lên</label>
-                                    <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none" aria-describedby="software_file_input_help" name="software_file_input[]" id="software_file_input" type="file" multiple>
-                                    <p class="text-sm text-gray-500" id="software_file_input_help">ZIP, RAR</p>
-                                </div>
-                            </td>
-                        </tr>
-                        
-                </table>
             </div>
         </div>
         <div class="text-right">
@@ -179,8 +178,11 @@
         }
     });
 
+    function test(obj) {
+        let value = obj.value;
+        console.log(value);
+    }
     
-
     
     
 </script>

@@ -1,7 +1,9 @@
 @extends('theme.layouts.index')
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('./assets/theme/css/product.css') }}">
-    <link rel="stylesheet" href="{{ asset('./assets/theme/css/breadcrumb.css') }}">
+    <!-- <link rel="stylesheet" href="{{ asset('./assets/theme/css/product.css') }}">
+    <link rel="stylesheet" href="{{ asset('./assets/theme/css/breadcrumb.css') }}"> -->
+    <link rel="stylesheet" href="/assets/theme/css/product.css">
+    <link rel="stylesheet" href="/assets/theme/css/breadcrumb.css">
 @endpush
 @section('title','Chi tiết sản phẩm')
 @section('content')
@@ -16,161 +18,139 @@
     </div>
 </section>
 <section class="s-area product-area">
-    <div class="product-wrap">
-        <div class="product-thumnail">
-            <div id="carouselExampleDark" class="carousel carousel-dark slide">
-                <div class="carousel-indicators">
-                    @foreach($listImg as $key => $img)
-                        @if($key == 0)
-                            <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="{{$key}}" class="active" aria-current="true" aria-label="Slide {{$key+1}}"></button>
-                        @else
-                            <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="{{$key}}" aria-current="true" aria-label="Slide {{$key+1}}"></button>
+    <h1 class="product__name containerx">{{ $product->name }}</h1>
+    <div class="containerx">
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
+            <div class="carousel-indicators">
+            @foreach($listImg as $key => $img)
+            @if($key == 0)
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{$key}}" class="active" aria-current="true" aria-label="Slide {{$key+1}}"></button>
+            @else
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{$key}}" class="" aria-current="true" aria-label="Slide {{$key+1}}"></button>
+            @endif
+            @endforeach
+            </div>
+            <div class="carousel-inner">
+            @foreach($listImg as $key => $img)
+            @if($key == 0)
+                <div class="carousel-item active">
+                    <div class="img-wrap">
+                        <img src="{{ asset('storage/products/'.$product->code.'/'.$img) }}" class="d-block " alt="{{ $product->name }}">
+                    </div>
+                </div>
+            @else
+                <div class="carousel-item">
+                    <div class="img-wrap">
+                        <img src="{{ asset('storage/products/'.$product->code.'/'.$img) }}" class="d-block " alt="{{ $product->name }}">
+                    </div>
+                </div>
+            @endif
+            @endforeach
+            </div>
+            @if(count($listImg) > 1)
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true" hidden></span>
+                    <span class="" aria-hidden="true"><i class="fa-solid fa-chevron-left"></i></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true" hidden></span>
+                    <span class="" aria-hidden="true"><i class="fa-solid fa-chevron-right"></i></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            @endif
+        </div>
+    </div>
+    <nav class="containerx tab-nav">
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">
+                <i class="fa-solid fa-file"></i>
+                Mô tả
+            </button>
+            <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">
+                <i class="fa-solid fa-microchip"></i>    
+                Thông số kỹ thuật
+            </button>
+            <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">
+                <i class="fa-solid fa-download"></i>
+                Tải xuống
+            </button>
+        </div>
+    </nav>
+    <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
+            <div id="description" class="containerx">
+                <div class="description-content">
+                    {!! $product->description !!}
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
+            <div id="specifications" class="containerx">
+                <table class="specifications-data">
+                    @foreach($product->specTypes as $spec)
+                    @if($spec->category_id == $product->category_id)
+                    <tr>
+                        <td>{{ $spec->name }}</td>
+                        <td>{{ $spec->pivot->value }}</td>
+                    </tr>
+                    @endif
+                    @endforeach
+                </table>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab" tabindex="0">
+            <div id="download" class="containerx">
+                <div class="download-wrap">
+                    <div class="document">
+                        <h6>Tài liệu</h6>
+                        @if($documentProduct)
+                        @foreach($documentProduct as $document)
+                            <div class="download-item" style="clear:both">
+                                <a target="_blank" href="{{ asset('storage/documents/'.$product->code.'/'.$document) }}"> 
+                                    <span class="download-icon"><i class="fa-solid fa-file-pdf"></i></span>
+                                    <span class="download-title">{{ $document }}</span>
+                                    <span class="download-ext">(PDF - File) </span>
+                                </a>
+                                <!-- <div class="download-meta">3. June 2019</div> -->
+                            </div>
+                        @endforeach
                         @endif
-                    @endforeach
-                </div>
-                <div class="carousel-inner">
-                    @foreach($listImg as $img)
-                    <div class="carousel-item active" data-bs-interval="10000">
-                        <img src="{{ asset('storage/products/'.$product->code.'/'.$img) }}" class="d-block w-100" alt="{{ $product->name }}">
                     </div>
-                    @endforeach
-                </div>
-                @if(count($listImg) > 1)
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
-                @endif
-                </div>
-        </div>
-        <div class="product-info">
-            <h1 class="product__name">{{ $product->name }}</h1>
-            <div class="product-tabs">
-                <a href="#description"><i class="fa-solid fa-file"></i>Mô tả</a>
-                <a href="#specifications"><i class="fa-solid fa-microchip"></i>Thông số kỹ thuật</a>
-                <a href="#download"><i class="fa-solid fa-download"></i>Tải xuống</a>
-            </div>
-        </div>
-    </div>
-    <div id="description" class="containerx">
-        <h3 class="description__title">Mô tả</h3>
-        <div class="description-content">
-            {!! $product->description !!}
-        </div>
-    </div>
-    <div id="specifications" class="containerx">
-        <div class="specification">
-            <h3 class="specifications__title">Thông số kỹ thuật</h3>
-            
-            <table class="specifications-data">
-                @foreach($product->specTypes as $spec)
-                <tr>
-                    <td>{{ $spec->name }}</td>
-                    <td>{{ $spec->pivot->value }}</td>
-                </tr>
-                @endforeach
-            </table>
-        </div>
-        <!-- <div class="features">
-            <h3 class="specifications__title">Đặc trưng</h3>
-            <table class="specifications-data">
-                <tr>
-                    <td>Component</td>
-                    <td>1 x 8” 8 Ohms long excursion Neodymium driver</td>
-                </tr>
-                <tr>
-                    <td>Connectors</td>
-                    <td>1 x Cable gland with 2 cores cables</td>
-                </tr>
-                <tr>
-                    <td>Rigging points</td>
-                    <td>2x M10 Threaded inserts + 2 x M6 threaded inserts</td>
-                </tr>
-                <tr>
-                    <td>Construction</td>
-                    <td>Baltic Birch Plywood</td>
-                </tr>
-                <tr>
-                    <td>Finish</td>
-                    <td>Black or White structural paint</td>
-                </tr>
-                <tr>
-                    <td>Front Finish</td>
-                    <td>UV Resistant acoustic fabric fitted Magnelis® front grill</td>
-                </tr>
-                <tr>
-                    <td>Operating temperature range</td>
-                    <td>0°C - 40 °C (32° F - 104° F)</td>
-                </tr>
-                <tr>
-                    <td>Storage temperature range</td>
-                    <td>-20 °C - 60 °C (-4 ° F - 140° F)</td>
-                </tr>
-                <tr>
-                    <td>Height x Width x Depth</td>
-                    <td>305mm x 307mm x 305mm (12.0” x 12.1” x 12.0”)</td>
-                </tr>
-                <tr>
-                    <td>Weight: Net</td>
-                    <td>8 kg / 17.6 lbs</td>
-                </tr>
-                <tr>
-                    <td>System Operation</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>Recommended powering solution</td>
-                    <td>DTDcontroller + DTDAMP4x0.7 : up to 2 x IDS108 per channel</td>
-                </tr>
-                <tr>
-                    <td>Optional powering solution</td>
-                    <td>DTDcontroller + DTDAMP4x1.3 : up to 2 x IDS108 per channel</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>NXAMP4x1mk2 Powered TDcontroller: up to 3 x IDS108 per channel</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>NXAMP4x4mk2 Powered TDcontroller: up to 4 x IDS108 per channel</td>
-                </tr>
-            </table>
-        </div> -->
-    </div>
-    <div id="download" class="containerx">
-        <h3 class="download__title">Tải xuống</h3>
-        <div class="download-wrap">
-            <div class="document">
-                <h6>Tài liệu</h6>
-                @foreach($documentProduct as $document)
-                    <div class="download-item" style="clear:both">
-                        <a target="_blank" href="{{ asset('storage/documents/'.$product->code.'/'.$document) }}"> 
-                            <span class="download-icon"><i class="fa-solid fa-file-pdf"></i></span>
-                            <span class="download-title">{{ $document }}</span>
-                            <span class="download-ext">(PDF - File) </span>
-                        </a>
-                        <!-- <div class="download-meta">3. June 2019</div> -->
+                    <div class="controller-software">
+                        <h6>Phầm mềm điều khiển</h6>
+                        @if($softwareProduct)
+                        @foreach($softwareProduct as $software)
+                        <div class="download-item" style="clear:both">
+                            <a target="_blank" href="{{ asset('storage/softwares/'.$product->code.'/'.$software) }}"> 
+                                <span class="download-icon"><i class="fa-solid fa-file-pdf"></i></span>
+                                <span class="download-title">{{ $software }}</span>
+                                <span class="download-ext">(ZIP - File) </span>
+                            </a>
+                            <!-- <div class="download-meta">3. June 2019 - Revision 3.9.1</div> -->
+                        </div>
+                        @endforeach
+                        @endif
                     </div>
-                @endforeach
-            </div>
-            <div class="controller-software">
-                <h6>Phầm mềm điều khiển</h6>
-                @foreach($softwareProduct as $software)
-                <div class="download-item" style="clear:both">
-                    <a target="_blank" href="{{ asset('storage/softwares/'.$product->code.'/'.$software) }}"> 
-                        <span class="download-icon"><i class="fa-solid fa-file-pdf"></i></span>
-                        <span class="download-title">{{ $software }}</span>
-                        <span class="download-ext">(ZIP - File) </span>
-                    </a>
-                    <!-- <div class="download-meta">3. June 2019 - Revision 3.9.1</div> -->
+                    <div class="">
+                        <h6>Driver</h6>
+                        @if($driverProduct)
+                        @foreach($driverProduct as $driver)
+                        <div class="download-item" style="clear:both">
+                            <a target="_blank" href="{{ asset('storage/drivers/'.$product->code.'/'.$driver) }}"> 
+                                <span class="download-icon"><i class="fa-solid fa-file-pdf"></i></span>
+                                <span class="download-title">{{ $driver }}</span>
+                                <span class="download-ext">(ZIP - File) </span>
+                            </a>
+                            <!-- <div class="download-meta">3. June 2019 - Revision 3.9.1</div> -->
+                        </div>
+                        @endforeach
+                        @endif
+                    </div>
                 </div>
-                @endforeach
             </div>
         </div>
     </div>
+    
 </section>
 @endsection

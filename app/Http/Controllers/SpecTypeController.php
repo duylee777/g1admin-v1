@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\SpecType;
 use Illuminate\Http\Request;
 
@@ -23,7 +24,10 @@ class SpecTypeController extends Controller
      */
     public function create()
     {
-        return view('admin.spec-type.create');
+        $dataView = [];
+        $categories = Category::get();
+        $dataView['categories'] = $categories;
+        return view('admin.spec-type.create', $dataView);
     }
 
     /**
@@ -38,6 +42,7 @@ class SpecTypeController extends Controller
         if(!in_array($request->name, $specTypeName)) {
             $newSpecTypeData = [
                 "name" => $request->name,
+                "category_id" => $request->category_id,
             ];
 
             SpecType::create($newSpecTypeData);
@@ -62,6 +67,8 @@ class SpecTypeController extends Controller
     public function edit($id)
     {
         $dataView = [];
+        $categories = Category::get();
+        $dataView['categories'] = $categories;
         $specType = SpecType::find($id);
         $dataView['specType'] = $specType;
         return view('admin.spec-type.edit', $dataView);
@@ -74,17 +81,28 @@ class SpecTypeController extends Controller
     {
         $specTypeName = [];
         foreach(SpecType::get() as $specType) {
-            $specTypeName[] = $specType->name;
+            if($specType->name != SpecType::find($id)->first()->name){
+                $specTypeName[] = $specType->name;
+            }
         }
-        if(!in_array($request->name, $specTypeName)) {
-            $updateSpecTypeData = [
-                "name" => $request->name,
-            ];
+        if(in_array($request->name, $specTypeName)){
+            return redirect()->route('spec-type.edit', $id)->with(['error' => 'Loại thông số kỹ thuật đã tồn tại !']);
+        }
+        else {
+            if($request->name != SpecType::find($id)->first()->name) {
+                $updateSpecTypeData = [
+                    "name" => $request->name,
+                    "category_id" => $request->category_id,
+                ];
+            }
+            else {
+                $updateSpecTypeData = [
+                    "category_id" => $request->category_id,
+                ];
+            }
+
             SpecType::where('id', $id)->update($updateSpecTypeData);
             return redirect()->route('spec-type.index')->with(['msg' => 'Cập nhật loại thông số kỹ thuật thành công !']);
-        } 
-        else {
-            return redirect()->route('spec-type.edit', $id)->with(['error' => 'Loại thông số kỹ thuật đã tồn tại !']);
         }
     }
 

@@ -12,9 +12,13 @@ class SpecType extends Model
     public $table = "specification_types";
 
     protected $fillable = [
-        'id','name',
+        'id','name','category_id'
     ];
 
+    public function category(){
+        return $this->belongsTo(Category::class);
+    }
+    
     public function specProducts(){
         return $this->belongsToMany(Product::class,'product_specifications','product_id','type_id')->withPivot('value');
     }

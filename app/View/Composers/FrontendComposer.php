@@ -2,6 +2,7 @@
 namespace App\View\Composers;
 use Illuminate\View\View;
 use App\Models\Category;
+use App\Models\Brand;
 
 class FrontendComposer
 {
@@ -25,6 +26,7 @@ class FrontendComposer
     {
         // $view->with('cates', Category::where('parent_id', 11)->get());
         $view->with('cates', Category::get());
+        $view->with('headerBrands', Brand::get());
     }
 }
 ?>

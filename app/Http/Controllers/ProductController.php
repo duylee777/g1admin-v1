@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Brand;
 use App\Models\Category;
 use App\Models\ExtendProduct;
 use App\Models\Product;
 use App\Models\SpecType;
 use App\Models\ProductSpec;
+use App\Models\Unit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -37,7 +39,11 @@ class ProductController extends Controller
             $categories = null;
         }
         $specTypes = SpecType::get();
+        $brands = Brand::get();
+        $units = Unit::get();
 
+        $dataView['units'] = $units;
+        $dataView['brands'] = $brands;
         $dataView['specTypes'] = $specTypes;
         $dataView['categories'] = $categories;
         return view('admin.product.create', $dataView);
@@ -48,6 +54,10 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        $slug = Parent::to_slug($request->name);
+        $active = $request->active ? 1 : 0;
+        $featured = $request->featured ? 1 : 0;
+      
         $getCodeProduct = [];
         foreach( Product::get() as $product) {
             $getCodeProduct[] = $product->code;
@@ -57,10 +67,14 @@ class ProductController extends Controller
             $newProductData = [
                 "code" => $request->code,
                 "name" => $request->name,
-                "slug" => $request->slug,
-                "active" => $request->active,
+                "slug" =>  $slug,
+                "active" => $active,
+                "featured" => $featured,
                 "description" => $request->description,
                 "category_id" => $request->category_id,
+                "brand_id" => $request->brand_id,
+                "unit_id" => $request->unit_id,
+                "origin" => $request->origin,
             ];
 
             $listImageName = [];
@@ -78,57 +92,22 @@ class ProductController extends Controller
 
             $product = Product::where('code', $request->code)->first();
 
+            $categoryIdByProduct = $request->category_id;
+            $specListByCategory = SpecType::where('category_id', $categoryIdByProduct)->get();
+            for($i = 0; $i < count($specListByCategory); $i++) {
+                $product->specTypes()->attach($specListByCategory[$i]->id, ['value' => '']);
+            }
+
             $newExpandProductData = [
                 "product_id" => $product->id,
+                "document" => json_encode(''),
+                "software" => json_encode(''),
+                "driver" => json_encode(''),
             ];
-
-            //tải lên tài liệu
-            if($request->file('document_file_input') != null) {
-                $listDoumentName = [];
-                $listDocument[] = $request->file('document_file_input'); 
-
-                foreach($request->file('document_file_input') as $inputDocument) {
-                    $documentName = time().'_'.$inputDocument->getClientOriginalName();
-                    $linkStorage = "public/documents/".$request->code."/";
-                    $inputDocument->storeAs($linkStorage, $documentName);
-                    $listDoumentName[] =  $documentName;
-                }
-                $newExpandProductData["document"] = json_encode($listDoumentName);
-            }
-            else {
-                $newExpandProductData["document"] = json_encode('');
-            }
-
-            //tải lên phần mềm
-            if($request->file('software_file_input') != null) {
-                $listSoftwareName = [];
-                $listSoftware[] = $request->file('software_file_input'); 
-
-                foreach($request->file('software_file_input') as $inputSoftware) {
-                    $softwareName = time().'_'.$inputSoftware->getClientOriginalName();
-                    $linkStorage = "public/softwares/".$request->code."/";
-                    $inputSoftware->storeAs($linkStorage, $softwareName);
-                    $listSoftwareName[] =  $softwareName;
-                }
-                $newExpandProductData["software"] = json_encode($listSoftwareName);
-            }
-            else {
-                $newExpandProductData["software"] = json_encode('');
-            }
-
             ExtendProduct::create($newExpandProductData);
 
-            $listSpecType = SpecType::get();
-            for($i = 0; $i < count($listSpecType); $i++) {
-                if($request->input('spectype_'.$i+1) != null) {
-                    $product->specTypes()->attach($listSpecType[$i]->id, ['value' => $request->input('spectype_'.$i+1)]);
-                }
-                else {
-                    $product->specTypes()->attach($listSpecType[$i]->id, ['value' => '']);
-                }
-            }
-
             return redirect()->route('product.index')->with(['msg' => 'Tạo mới sản phẩm thành công !']);
+ 
         }
         else {
             // Storage::deleteDirectory('public/products/'.$request->code);
@@ -142,14 +121,7 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        $dataView = [];
-        $specTypes = SpecType::get();
-        $product = Product::find($id);
-        $extendProduct = ExtendProduct::where('product_id',$id)->first();
-        $dataView['product'] = $product;
-        $dataView['specTypes'] = $specTypes;
-        $dataView['extendProduct'] = $extendProduct;
-        return view('admin.product.show', $dataView);
+        return redirect()->route('product.edit', $id);
     }
 
     /**
@@ -168,6 +140,11 @@ class ProductController extends Controller
         
         $product = Product::find($id);
         $extendProduct = ExtendProduct::where('product_id',$id)->first();
+        $brands = Brand::get();
+        $units = Unit::get();
+
+        $dataView['units'] = $units;
+        $dataView['brands'] = $brands;
         $dataView['categories'] = $categories;
         $dataView['product'] = $product;
         $dataView['extendProduct'] = $extendProduct;
@@ -181,13 +158,21 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
         $product = Product::find($id);
+
+        $slug = Parent::to_slug($request->name);
+        $active = $request->active ? 1 : 0;
+        $featured = $request->featured ? 1 : 0;
         
         $updateProductData = [
             "name" => $request->name,
-            "slug" => $request->slug,
-            "active" => $request->active,
+            "slug" =>  $slug,
+            "active" => $active,
+            "featured" => $featured,
             "description" => $request->description,
             "category_id" => $request->category_id,
+            "brand_id" => $request->brand_id,
+            "unit_id" => $request->unit_id,
+            "origin" => $request->origin,
         ];
 
         if($request->file('images') != null) {
@@ -204,55 +189,8 @@ class ProductController extends Controller
             $updateProductData["images"] = json_encode($listImageName);
         }
 
-        $updateExpandProductData = [];
-        
-        //tải lên tài liệu
-        if($request->file('document_file_input') != null) {
-            Storage::deleteDirectory('public/documents/'.$product->code);
-            $listDoumentName = [];
-            $listDocument[] = $request->file('document_file_input'); 
-
-            foreach($request->file('document_file_input') as $inputDocument) {
-                $documentName = time().'_'.$inputDocument->getClientOriginalName();
-                $linkStorage = "public/documents/".$product->code."/";
-                $inputDocument->storeAs($linkStorage, $documentName);
-                $listDoumentName[] =  $documentName;
-            }
-            $updateExpandProductData["document"] = json_encode($listDoumentName);
-        }
-
-        //tải lên phần mềm
-        if($request->file('software_file_input') != null) {
-            Storage::deleteDirectory('public/softwares/'.$product->code);
-            $listSoftwareName = [];
-            $listSoftware[] = $request->file('software_file_input'); 
-
-            foreach($request->file('software_file_input') as $inputSoftware) {
-                $softwareName = time().'_'.$inputSoftware->getClientOriginalName();
-                $linkStorage = "public/softwares/".$product->code."/";
-                $inputSoftware->storeAs($linkStorage, $softwareName);
-                $listSoftwareName[] =  $softwareName;
-            }
-            $updateExpandProductData["software"] = json_encode($listSoftwareName);
-        }
-
-        if(count($updateExpandProductData) != 0) {
-            ExtendProduct::where('product_id', $id)->update($updateExpandProductData);
-        }
-        
-        $listSpecType = SpecType::get();
-        for($i = 0; $i < count($listSpecType); $i++) {
-            if($request->input('spectype_'.$i+1) != null) {
-                $product->specTypes()->updateExistingPivot($listSpecType[$i]->id, ['value' => $request->input('spectype_'.$i+1)]);
-            }
-            else {
-                $product->specTypes()->updateExistingPivot($listSpecType[$i]->id, ['value' =>'']);
-            }
-        }
-
-        
         Product::where('id', $id)->update($updateProductData);
-        return redirect()->route('product.show', $id)->with(['msg' => 'Đã cập nhật sản phẩm !']);
+        return redirect()->route('product.edit', $id)->with(['msg' => 'Đã cập nhật sản phẩm !']);   
     }
 
     /**
@@ -264,4 +202,6 @@ class ProductController extends Controller
         $product->delete();
         return redirect()->route('product.index')->with(['msg' => 'Xóa sản phẩm thành công !']);
     }
+
 }
+

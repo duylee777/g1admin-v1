@@ -12,6 +12,6 @@ class ExtendProduct extends Model
     public $table = 'extend_products';
 
     protected $fillable = [
-        'product_id', 'document', 'software'
+        'product_id', 'document', 'software', 'driver'
     ];
 }

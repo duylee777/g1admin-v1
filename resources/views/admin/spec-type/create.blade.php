@@ -46,6 +46,19 @@
                 <label for="name" class="block mb-2 font-semibold text-gray-900">Loại thông số</label>
                 <input type="text" name="name" id="name" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" placeholder="Nhập tên loại thông số ..." required="">
             </div>
+            <div class="sm:col-span-2">
+                <label for="category_id" class="block mb-2 font-semibold text-gray-900">Danh mục</label>
+                <select id="category_id" name="category_id" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
+                    <option value="0" selected>-- Không có danh mục --</option>
+                    @if($categories != null)
+                        @foreach($categories as $category)
+                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                        @endforeach
+                    @else
+                        <option disabled>(Chưa khởi tạo danh mục)</option>
+                    @endif
+                </select>
+            </div>
         </div>
         <div class="text-right">
             <button type="submit" class="px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 hover:bg-blue-800">
