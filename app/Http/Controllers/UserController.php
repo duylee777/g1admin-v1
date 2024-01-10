@@ -13,6 +13,10 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function __construct() {
+        $this->middleware('superadmin');
+    }
+
     public function index()
     {
         $dataView = [];
@@ -62,8 +66,9 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $dataView = [];
         $user = User::find($id);
+        $dataView = [];
+        
         $dataView['user'] = $user;
         return view('admin.user.show', $dataView);
     }

@@ -12,7 +12,10 @@ class UserPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        if(contains($user)) {
+            return true;
+        }
+        else return false;
     }
 
     /**
@@ -20,7 +23,7 @@ class UserPolicy
      */
     public function view(User $user, User $model)
     {
-        //
+        return $user->is($model);
     }
 
     /**
@@ -36,7 +39,7 @@ class UserPolicy
      */
     public function update(User $user, User $model)
     {
-        //
+        return $user->is($model);
     }
 
     /**

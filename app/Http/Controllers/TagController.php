@@ -10,6 +10,10 @@ class TagController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function __construct() {
+        $this->middleware('superadmin');
+    }
+    
     public function index()
     {
         $dataView = [];

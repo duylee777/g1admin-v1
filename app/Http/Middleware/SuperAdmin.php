@@ -19,7 +19,7 @@ class SuperAdmin
         if(Auth::guard('superadmin')->check()) {
             return $next($request);
         } else {
-            return redirect()->route('admin.dashboard');
+            return redirect()->route('admin.login');
         }
         return $next($request);
     }

@@ -21,7 +21,6 @@
                 </nav>
                 <div class="searchbar">
                     <form method="GET" action="{{ route('theme.search') }}">
-                        
                         <input type="text" name="keyword" placeholder="Nhập từ khóa bạn muốn tìm kiếm ...">
                         <button><i class="fa-solid fa-magnifying-glass"></i></button>
                     </form>
