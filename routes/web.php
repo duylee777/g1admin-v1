@@ -55,6 +55,7 @@ Route::get('/tai-ve', [HomeController::class, 'download'])->name('theme.download
 Route::get('/lien-he', [HomeController::class, 'contact'])->name('theme.contact');
 Route::post('/lien-he', [HomeController::class, 'contactPost'])->name('theme.contact_post');
 Route::get('/tim-kiem', [SearchController::class, 'search'])->name('theme.search');
+Route::get('/thuong-hieu/{slug_brand?}', [HomeController::class, 'brand'])->name('theme.brand');
 
 
 Route::prefix('admin') -> group(function () {

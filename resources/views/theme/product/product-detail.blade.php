@@ -20,46 +20,16 @@
 <section class="s-area product-area">
     <h1 class="product__name containerx">{{ $product->name }}</h1>
     <div class="containerx">
-        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
-            <div class="carousel-indicators">
+        <div class="row row-gap-4 ">
             @foreach($listImg as $key => $img)
-            @if($key == 0)
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{$key}}" class="active" aria-current="true" aria-label="Slide {{$key+1}}"></button>
-            @else
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{$key}}" class="" aria-current="true" aria-label="Slide {{$key+1}}"></button>
-            @endif
-            @endforeach
-            </div>
-            <div class="carousel-inner">
-            @foreach($listImg as $key => $img)
-            @if($key == 0)
-                <div class="carousel-item active">
-                    <div class="img-wrap">
-                        <img src="{{ asset('storage/products/'.$product->code.'/'.$img) }}" class="d-block " alt="{{ $product->name }}">
-                    </div>
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                <div class="d-flex justify-content-center align-items-center p-4 overflow-hidden bg-white shadow w-full rounded img-wrap">
+                    <img src="{{ asset('storage/products/'.$product->code.'/'.$img) }}" class="" alt="{{ $product->name }}">
                 </div>
-            @else
-                <div class="carousel-item">
-                    <div class="img-wrap">
-                        <img src="{{ asset('storage/products/'.$product->code.'/'.$img) }}" class="d-block " alt="{{ $product->name }}">
-                    </div>
-                </div>
-            @endif
-            @endforeach
             </div>
-            @if(count($listImg) > 1)
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true" hidden></span>
-                    <span class="" aria-hidden="true"><i class="fa-solid fa-chevron-left"></i></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true" hidden></span>
-                    <span class="" aria-hidden="true"><i class="fa-solid fa-chevron-right"></i></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
-            @endif
+            @endforeach
         </div>
+        
     </div>
     <nav class="containerx tab-nav">
         <div class="nav nav-tabs" id="nav-tab" role="tablist">

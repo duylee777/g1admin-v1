@@ -138,7 +138,7 @@
                             @endif
                             @if($brands != null)
                                 @foreach($brands as $brand)
-                                    @if($product->brand_id == $category->id)
+                                    @if($product->brand_id == $brand->id)
                                         <option value="{{ $brand->id }}" selected>{{ $brand->name }}</option>
                                     @else
                                         <option value="{{ $brand->id }}">{{ $brand->name }}</option>

@@ -59,7 +59,7 @@
         
     </div>
     
-    <div class="contactpage-maps">
+    <div class="contactpage-maps containerx">
         <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d931.3295967207595!2d105.76048861158327!3d20.979870758898908!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjDCsDU4JzQ4LjQiTiAxMDXCsDQ1JzM5LjYiRQ!5e0!3m2!1svi!2s!4v1700991792090!5m2!1svi!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
 </section>

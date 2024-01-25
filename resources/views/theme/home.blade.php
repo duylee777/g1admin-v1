@@ -11,74 +11,50 @@
 @endsection
 @section('content')
 <section class="featured-product-area">
-    <div class="s-header">
-        <h2 class="s-header__title">Sản phẩm nổi bật</h2>
-    </div>
-    <div id="carouselExampleDark" class="carousel carousel-dark slide">
-        <div class="carousel-indicators">
-            @foreach($products as $key => $product)
-                @if($key == 0)
-                    <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="{{$key}}" class="active" aria-current="true" aria-label="Slide {{$key+1}}"></button>
-                @else
-                    <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="{{$key}}" aria-label="Slide {{$key+1}}"></button>
-                @endif
-            @endforeach
-        </div>
-        <div class="carousel-inner featured-product-inner">
-            @foreach($products as $key => $product)
-            @php 
-                $img = json_decode($product->images);
-            @endphp
-            @if($key == 0)
-                <div class="carousel-item active">
-                    <div class="featured-product">
-                        <div class="featured-product-thumnail">
-                            <div class="featured-product__img">
-                                <img src="{{ asset('storage/products/'.$product->code.'/'.$img[0]) }}" alt="{{ $product->name }}">
-                            </div>
-                        </div>
-                        <div class="featured-product-wrap">
-                            <h3 class="featured-product__title">{{ $product->name }}</h3>
-                            <h4 class="featured-product__subtitle">{{ $product->category->name }}</h4>
-                            <p class="featured-product__description">{!! $product->category->description !!}</p>
-                            <div class="featured-product__link">
-                                <a href="{{ route('theme.product_detail',['slug_category' => $product->category->slug, 'slug_product' => $product->slug]) }}">Chi tiết</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            @else
-                <div class="carousel-item">
-                    <div class="featured-product">
-                        <div class="featured-product-thumnail">
-                            <div class="featured-product__img">
-                                <img src="{{ asset('storage/products/'.$product->code.'/'.$img[0]) }}" alt="{{ $product->name }}">
-                            </div>
-                        </div>
-                        <div class="featured-product-wrap">
-                            <h3 class="featured-product__title">{{ $product->name }}</h3>
-                            <h4 class="featured-product__subtitle">{{ $product->category->name }}</h4>
-                            <p class="featured-product__description">{!! $product->category->description !!}</p>
-                            <div class="featured-product__link">
-                                <a href="{{ route('theme.product_detail',['slug_category' => $product->category->slug, 'slug_product' => $product->slug]) }}">Chi tiết</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <div class="featured-product-wrap containerx">
+        <div class="category-by-product-wrap">
+            @if($cates != null)
+            <ul class="category-by-product">
+                @foreach($cates as $cate)
+                    @if($cate->parent_id == 11)
+                        <li class="category-by-product-item">
+                            <a href="{{ route('theme.category',$cate->slug) }}" class="category-by-product-link">{{ $cate->name }}</a>
+                        </li>
+                    @endif
+                @endforeach
+            </ul>
             @endif
-            @endforeach
-            
         </div>
-        @if(count($products) > 1)
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
-        @endif
+        <div class="visible-featured-product">
+            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                </div>
+                <div class="carousel-inner">
+                    <a href="" class="carousel-item active">
+                        <img src="https://images.pexels.com/photos/691668/pexels-photo-691668.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" class="" alt="...">
+                    </a>
+                    <a href="" class="carousel-item">
+                        <img src="https://images.pexels.com/photos/189349/pexels-photo-189349.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" class="" alt="...">
+                    </a>
+                    <a href="" class="carousel-item">
+                        <img src="https://images.pexels.com/photos/1612351/pexels-photo-1612351.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" class="" alt="...">
+                    </a>
+                </div>
+                @if(count($products) > 1)
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+                @endif
+            </div>
+        </div>
     </div>
 </section>
 <section class="blog-area">

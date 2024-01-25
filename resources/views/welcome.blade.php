@@ -138,3 +138,44 @@
         </div>
     </body>
 </html>
+
+<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
+            <div class="carousel-indicators">
+            @foreach($listImg as $key => $img)
+            @if($key == 0)
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{$key}}" class="active" aria-current="true" aria-label="Slide {{$key+1}}"></button>
+            @else
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{$key}}" class="" aria-current="true" aria-label="Slide {{$key+1}}"></button>
+            @endif
+            @endforeach
+            </div>
+            <div class="carousel-inner">
+            @foreach($listImg as $key => $img)
+            @if($key == 0)
+                <div class="carousel-item active">
+                    <div class="img-wrap">
+                        <img src="{{ asset('storage/products/'.$product->code.'/'.$img) }}" class="d-block " alt="{{ $product->name }}">
+                    </div>
+                </div>
+            @else
+                <div class="carousel-item">
+                    <div class="img-wrap">
+                        <img src="{{ asset('storage/products/'.$product->code.'/'.$img) }}" class="d-block " alt="{{ $product->name }}">
+                    </div>
+                </div>
+            @endif
+            @endforeach
+            </div>
+            @if(count($listImg) > 1)
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true" hidden></span>
+                    <span class="" aria-hidden="true"><i class="fa-solid fa-chevron-left"></i></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true" hidden></span>
+                    <span class="" aria-hidden="true"><i class="fa-solid fa-chevron-right"></i></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            @endif
+        </div>

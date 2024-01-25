@@ -1,9 +1,14 @@
+.agency-filter {
+    display: grid;
+    grid-template-columns: auto auto;
+    align-items: center;
+}
 .agency-filter-select {
     margin: 2.5rem 0;
 }
 .agency-filter-select select {
     padding: 0.5rem 1rem;
-    width: 25%;
+    width: 50%;
 }
 .agency-area {
     padding-bottom: 5rem;

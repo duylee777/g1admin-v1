@@ -129,4 +129,13 @@ class HomeController extends Controller
         return response()->json();
     }
 
+    public function brand($slug_brand) {
+        $dataView = [];
+        $brand = Brand::where('slug', $slug_brand)->first();
+        $listProductByBrand = Product::where('brand_id', $brand->id)->get();
+        $dataView['brand'] = $brand;
+        $dataView['listProductByBrand'] = $listProductByBrand;
+        return view('theme.brand', $dataView);
+    }
+
 }

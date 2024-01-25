@@ -50,7 +50,7 @@
                         </div>
                         <div class="offcanvas-body">
                             <div class="m-product-portfolio-wrap">
-                                <button id="toggleMenuMobileBtn"><i class="fa-solid fa-bars-staggered"></i> <span>Danh mục sản phẩm</span><i class="fa-solid fa-chevron-down"></i></button>
+                                <button id="toggleMenuMobileBtn"><i class="fa-solid fa-bars-staggered"></i> <span>sản phẩm</span><i class="fa-solid fa-chevron-down"></i></button>
                                 <div class="m-product-portfolio-toggle">
                                     @if($cates != null)
                                         <ul class="m-product-portfolio">
@@ -100,13 +100,13 @@
         <div class="mask">
             <div class="header-wrap header-wrap--gray">
                 <div class="toggle-menu">
-                    <button id="toggleMenuBtn"><i class="fa-solid fa-bars-staggered"></i> <span>Danh mục sản phẩm</span></button>
+                    <button id="toggleMenuBtn"><i class="fa-solid fa-bars-staggered"></i> <span>sản phẩm</span></button>
                 </div>
                 <div class="brands">
                     <nav>
                         @if($headerBrands)
                             @foreach($headerBrands as $brand)
-                            <a href="" class="brands__name">
+                            <a href="{{ route('theme.brand',$brand->slug) }}" class="brands__name">
                                 <img src="{{asset('../storage/brands/'.$brand->id.'/'.$brand->image)}}" alt="" width="60">
                             </a>
                             @endforeach

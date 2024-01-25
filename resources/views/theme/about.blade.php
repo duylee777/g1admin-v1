@@ -48,7 +48,7 @@
                 </div>
                 <div class="aboutpage-content__detail">
                     <p><strong>Niềm tin của khách hàng dành chúng tôi chính là giá trị lớn nhất và ý nghĩa nhất với chúng tôi.</strong></p>
-                    <p>Trải qua thời gian, thử thách và biến động của thị trường,  đội ngũ lãnh đạo và cán bộ nhân viên đã cùng nhau xây dựng nên những giá trị cốt lõi và bản sắc văn hoá riêng, tạo nên tầm vóc mới, sức mạnh mới cho thương hiệu Công ty Phượng Hoàng. Chúng tôi tin tưởng rằng, với sự ủng hộ mạnh mẽ hơn nữa của các Quý khách hang, đối tác, đội ngũ lãnh đạo và nhân viên, cùng chiến lược hoạt động đúng đắn, Công ty Cổ phần Điện Tử Phượng Hoàng sẽ phát triển ngày một lớn mạnh.</p>
+                    <p>Trải qua thời gian, thử thách và biến động của thị trường,  đội ngũ lãnh đạo và cán bộ nhân viên đã cùng nhau xây dựng nên những giá trị cốt lõi và bản sắc văn hoá riêng, tạo nên tầm vóc mới, sức mạnh mới cho thương hiệu Công ty Phượng Hoàng. Chúng tôi tin tưởng rằng, với sự ủng hộ mạnh mẽ hơn nữa của các Quý khách hàng, đối tác, đội ngũ lãnh đạo và nhân viên, cùng chiến lược hoạt động đúng đắn, Công ty Cổ phần Điện Tử Phượng Hoàng sẽ phát triển ngày một lớn mạnh.</p>
                 </div>
             </div>
         </div>

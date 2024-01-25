@@ -32,14 +32,19 @@
     font-size: 12px;
     padding-right: 5px;
 }
+
 .title-post h3{
     padding: 10px 0px;
     font-size: 22px;
     color: var(--text-color__grey--semibold);
     overflow: hidden;
+    transition: all 300ms ease-in-out;
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
+}
+.title-post h3:hover {
+    color: var(--color__base);
 }
 .img-post{
    width: 30%;
@@ -47,6 +52,10 @@
    display: flex;
    align-items: center;
    justify-content: center;
+   transition: all 700ms ease-in-out;
+}
+.img-post:hover {
+    transform: scale(1.1);
 }
 .img-post img{
     display: block;
