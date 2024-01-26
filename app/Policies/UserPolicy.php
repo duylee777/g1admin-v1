@@ -4,26 +4,37 @@ namespace App\Policies;
 
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
+use Illuminate\Support\Facades\Gate;
+
+
+Gate::before(function (User $user, string $ability) {
+    if ($user->isAdministrator()) {
+        return true;
+    }
+});
 
 class UserPolicy
 {
     /**
      * Determine whether the user can view any models.
      */
+    // public function before($user, $ability){
+    //     if($user->isAdministrator()){
+    //         return true;
+    //     }
+    // }
+
     public function viewAny(User $user)
     {
-        if(contains($user)) {
-            return true;
-        }
-        else return false;
+        return true;
     }
 
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, User $model)
+    public function view(User $user, $id)
     {
-        return $user->is($model);
+        return true;
     }
 
     /**
@@ -37,9 +48,9 @@ class UserPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, User $model)
+    public function update(User $user, $id)
     {
-        return $user->is($model);
+        return $user->id === $id;
     }
 
     /**

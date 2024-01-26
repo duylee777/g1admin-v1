@@ -17,14 +17,15 @@ class AdminController extends Controller
 
     public function loginPost(Request $request){
         $credentials = $request->only('username', 'password');
-        $isSuperAdmin = Auth::guard('superadmin')->attempt($credentials);
-        // $isUser = Auth::guard('user')->attempt($credentials);
-        if($isSuperAdmin) {
-            return redirect()->route('admin.dashboard');
-        }
-        // else if($isUser){
+        // $isSuperAdmin = Auth::guard('superadmin')->attempt($credentials);
+        $isUser = Auth::guard('user')->attempt($credentials);
+        // if($isSuperAdmin) {
         //     return redirect()->route('admin.dashboard');
         // }
+        // else 
+        if($isUser){
+            return redirect()->route('admin.dashboard');
+        }
         else{
             return redirect()->route('admin.login')->withErrors(['msg' => 'Error !!!']);
         }    
@@ -35,7 +36,7 @@ class AdminController extends Controller
     }
 
     public function logout(){
-        Auth::guard('superadmin')->logout();
+        Auth::guard('user')->logout();
         return redirect()->route('admin.login');
     }
 }

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class TagController extends Controller
 {
@@ -11,7 +13,8 @@ class TagController extends Controller
      * Display a listing of the resource.
      */
     public function __construct() {
-        $this->middleware('superadmin');
+        // $this->middleware('superadmin');
+        var_dump(Auth::check());die;
     }
     
     public function index()

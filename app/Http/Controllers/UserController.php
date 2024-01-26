@@ -7,18 +7,22 @@ use App\Models\User;
 use App\Models\Role;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+
     public function __construct() {
-        $this->middleware('superadmin');
+        // $this->middleware('user');
+        // $this->authorize(User::class);
     }
 
     public function index()
     {
+       
         $dataView = [];
         $users = User::paginate(10);
         $dataView['users'] = $users;
@@ -56,6 +60,7 @@ class UserController extends Controller
             "username" => $request->username,
             "password" => Hash::make($request->password),
             "avatar" => $avatarName,
+            "role_id" => 0
         ];
         User::create($newUserData);
         return redirect()->route('user.index')->with(['msg' => 'Thêm mới dữ liệu thành công !']);
@@ -66,6 +71,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
+
         $user = User::find($id);
         $dataView = [];
         
@@ -83,12 +89,24 @@ class UserController extends Controller
         $user = User::find($id);
         $dataView['roles'] = $roles;
         $dataView['user'] = $user;
-        return view('admin.user.edit', $dataView);
+
+        if(Auth::guard('user')->user()->role_id == 0 && Auth::guard('user')->user()->id == $id) {
+           
+            return view('admin.user.edit', $dataView);
+        }
+        else if(Auth::guard('user')->user()->role_id == 1) {
+            
+            return view('admin.user.edit', $dataView);
+        }
+        else {
+            echo "Không có quyền truy cập !";
+        }  
     }
 
     /**
      * Update the specified resource in storage.
      */
+
     public function update(Request $request, $id)
     {
         $user = User::find($id);
@@ -125,9 +143,20 @@ class UserController extends Controller
                 }
             }
         }
-        
-        User::where('id', $id)->update($updateUserData);
-        return redirect()->route('user.index')->with(['msg' => 'Cập nhật dữ liệu thành công !']);
+
+        if(Auth::guard('user')->user()->role_id == 0 && Auth::guard('user')->user()->id == $id) {
+            
+            User::where('id', $id)->update($updateUserData);
+            return redirect()->route('user.edit', $id)->with(['msg' => 'Cập nhật dữ liệu thành công !']);
+        }
+        else if(Auth::guard('user')->user()->role_id == 1) {
+            
+            User::where('id', $id)->update($updateUserData);
+            return redirect()->route('user.index')->with(['msg' => 'Cập nhật dữ liệu thành công !']);
+        }
+        else {
+            echo "Không có quyền truy cập !";
+        }  
     }
 
     /**

@@ -65,12 +65,23 @@ Route::prefix('admin') -> group(function () {
     Route::get('/logout', [AdminController::class, 'logout'])->name('admin.logout');
    
 
-    Route::middleware('superadmin')->group(function () {
+    Route::middleware('user')->group(function () {
         Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
-        Route::resource('/role', RoleController::class);
-        Route::resource('/group', GroupController::class);
-        Route::resource('/permission', PermissionController::class);
-        Route::resource('/user', UserController::class);
+        Route::middleware('admin')->group(function () {
+            Route::resource('/user', UserController::class);
+            Route::resource('/role', RoleController::class);
+            Route::resource('/group', GroupController::class);
+            Route::resource('/permission', PermissionController::class);
+        });
+        Route::resource('/user', UserController::class, [
+            
+                'names' => [
+                    'edit' => 'user.edit', 
+                    // 'store' => 'user.store', 
+                    'update' => 'user.update', 
+                    // 'destroy' => 'user.delete'
+                ]
+        ])->except(['index','create', 'store', 'show', 'delete']);
         Route::resource('/category', CategoryController::class);
         Route::resource('/product', ProductController::class);
         Route::resource('/product-spec', ProductSpecController::class);

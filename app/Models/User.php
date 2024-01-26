@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\Auth;
 
 class User extends Authenticatable
 {
@@ -17,6 +18,7 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+    public $table = 'users';
     protected $fillable = [
         'name',
         'username',
@@ -25,6 +27,7 @@ class User extends Authenticatable
         'phone',
         'address',
         'avatar',
+        'role_id'
     ];
 
     /**
@@ -55,17 +58,11 @@ class User extends Authenticatable
         return $this->belongsToMany(Group::class,'user_group');
     }
 
-    // public function isSuperAdmin(){
-    //     if ($this->roles()->type=="super_admin"){
-    //         return true;
-    //     }
-    //     return false;
-    // }
-    // public function isAdmin(){
-    //     if ($this->roles()->type=="admin"){
-    //         return true;
-    //     }
-    //     return false;
-    // }
-    
+    public function isAdministrator(){
+        if (Auth::guard('user')->user()->role_id == 1){
+            return true;
+        }
+        return false;
+    }
+
 }
