@@ -74,21 +74,26 @@ $(function() {
 });
 
 var isNone = $('.homebanner').length;
+
 if(isNone == 0) {
+    $('#v2h_cushion').addClass('v2h_cushion');
     $('.header-area').addClass('no-video');
     $('.category-info').css('background-color','var(--bg__black)');
-    if(screen.width >= 577) {
-        $('.cushion-layer').height($('.header-area').height());
-    }
+    // if(screen.width >= 577) {
+    //     $('.cushion-layer').height($('.header-area').height());
+    // }
+}
+if(isNone != 0) {
+    $('#v2h_cushion').removeClass('v2h_cushion');
 }
 $(window).resize(function(){
-   
-    if(screen.width >= 577) {
-        $('.cushion-layer').height($('.header-area').height());
-    }
-    else {
-        $('.cushion-layer').height(0);
-    }
+    $('.cushion-layer').height(0);
+    // if(screen.width >= 577) {
+    //     $('.cushion-layer').height($('.header-area').height());
+    // }
+    // else {
+    //     $('.cushion-layer').height(0);
+    // }
 })
 
 

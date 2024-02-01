@@ -1,7 +1,7 @@
 @extends('theme.layouts.index')
 @section('title','Trang chủ')
 @section('bg-video')
-<section class="homebanner">
+<section id="homebanner" class="homebanner">
     <div class="homebanner__mask">
         <video autoplay muted loop>
             <source src="{{ asset('assets/theme/videos/phoenix.mp4') }}" type="video/mp4">

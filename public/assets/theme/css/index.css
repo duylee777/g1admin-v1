@@ -1072,7 +1072,8 @@ body {
     }
     .brands nav {
         flex-wrap: wrap;
-        gap: 1rem;
+        row-gap: 0.5rem;
+        column-gap: 0.5rem;
     }
  
    
