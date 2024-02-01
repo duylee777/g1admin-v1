@@ -22,11 +22,19 @@
     <div class="containerx">
         <div class="row row-gap-4 ">
             @foreach($listImg as $key => $img)
+            @if($key==0)
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4" hidden>
+                <div class="d-flex justify-content-center align-items-center p-4 overflow-hidden bg-white shadow w-full rounded img-wrap">
+                    <img src="{{ asset('storage/products/'.$product->code.'/'.$img) }}" class="" alt="{{ $product->name }}">
+                </div>
+            </div>
+            @else
             <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
                 <div class="d-flex justify-content-center align-items-center p-4 overflow-hidden bg-white shadow w-full rounded img-wrap">
                     <img src="{{ asset('storage/products/'.$product->code.'/'.$img) }}" class="" alt="{{ $product->name }}">
                 </div>
             </div>
+            @endif
             @endforeach
         </div>
         

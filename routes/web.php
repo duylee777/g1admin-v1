@@ -6,6 +6,7 @@ use App\Http\Controllers\AgencyController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ExcelController;
 use App\Http\Controllers\ExtendProductController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\SearchController;
@@ -82,6 +83,11 @@ Route::prefix('admin') -> group(function () {
                     // 'destroy' => 'user.delete'
                 ]
         ])->except(['index','create', 'store', 'show', 'delete']);
+        Route::post('/import', [ProductSpecController::class, 'import'])->name('admin.import');
+        Route::get('/excel-products', [ExcelController::class, 'indexExcelProducts'])->name('admin.index-excel-products');
+        Route::get('/excel-products/export', [ExcelController::class, 'exportProducts'])->name('admin.export-products');
+        Route::post('/excel-products/import', [ExcelController::class, 'importProducts'])->name('admin.import-products');
+
         Route::resource('/category', CategoryController::class);
         Route::resource('/product', ProductController::class);
         Route::resource('/product-spec', ProductSpecController::class);

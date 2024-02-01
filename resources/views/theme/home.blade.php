@@ -4,7 +4,7 @@
 <section class="homebanner">
     <div class="homebanner__mask">
         <video autoplay muted loop>
-            <source src="{{ asset('assets/theme/videos/banner-audio-homepage.mp4') }}" type="video/mp4">
+            <source src="{{ asset('assets/theme/videos/phoenix.mp4') }}" type="video/mp4">
         </video>
     </div>
 </section>
@@ -33,15 +33,23 @@
                     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
                 </div>
                 <div class="carousel-inner">
-                    <a href="" class="carousel-item active">
-                        <img src="https://images.pexels.com/photos/691668/pexels-photo-691668.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" class="" alt="...">
+                @foreach($products as $key => $product)
+                @php 
+                    $img = json_decode($product->images);
+                @endphp
+                @if($key == 0)
+                    <a href="{{ route('theme.product_detail',['slug_category' => $product->category->slug, 'slug_product' => $product->slug]) }}" class="carousel-item active">
+                        <img src="{{ asset('storage/products/'.$product->code.'/'.$img[0]) }}" alt="{{ $product->name }}" class="" alt="...">
                     </a>
-                    <a href="" class="carousel-item">
-                        <img src="https://images.pexels.com/photos/189349/pexels-photo-189349.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" class="" alt="...">
+                @else
+                    <a href="{{ route('theme.product_detail',['slug_category' => $product->category->slug, 'slug_product' => $product->slug]) }}" class="carousel-item">
+                        <img src="{{ asset('storage/products/'.$product->code.'/'.$img[0]) }}" alt="{{ $product->name }}" class="" alt="...">
                     </a>
-                    <a href="" class="carousel-item">
+                @endif
+                @endforeach
+                    <!-- <a href="" class="carousel-item">
                         <img src="https://images.pexels.com/photos/1612351/pexels-photo-1612351.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" class="" alt="...">
-                    </a>
+                    </a> -->
                 </div>
                 @if(count($products) > 1)
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">

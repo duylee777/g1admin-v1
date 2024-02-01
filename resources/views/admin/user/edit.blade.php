@@ -39,12 +39,21 @@
     </ol>
 </nav>
 <section class="bg-gray-50 dark:bg-gray-900 py-4 sm:py-5 mt-5">
-    <a href="{{ route('user.show', $user->id) }}" class="mx-4 mb-4 inline-flex items-center gap-1 px-4 py-2 bg-white shadow rounded hover:bg-gray-100">
+    @if(Auth::guard('user')->user()->role_id == 1)
+    <a href="{{ route('user.index') }}" class="mx-4 mb-4 inline-flex items-center gap-1 px-4 py-2 bg-white shadow rounded hover:bg-gray-100">
         <svg xmlns="http://www.w3.org/2000/svg" height="16" width="8" viewBox="0 0 256 512">
             <path d="M31.7 239l136-136c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9L127.9 256l96.4 96.4c9.4 9.4 9.4 24.6 0 33.9L201.7 409c-9.4 9.4-24.6 9.4-33.9 0l-136-136c-9.5-9.4-9.5-24.6-.1-34z"/>
         </svg>
         Quay lại
     </a>
+    @else
+    <a href="{{ route('admin.dashboard') }}" class="mx-4 mb-4 inline-flex items-center gap-1 px-4 py-2 bg-white shadow rounded hover:bg-gray-100">
+        <svg xmlns="http://www.w3.org/2000/svg" height="16" width="8" viewBox="0 0 256 512">
+            <path d="M31.7 239l136-136c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9L127.9 256l96.4 96.4c9.4 9.4 9.4 24.6 0 33.9L201.7 409c-9.4 9.4-24.6 9.4-33.9 0l-136-136c-9.5-9.4-9.5-24.6-.1-34z"/>
+        </svg>
+        Quay lại
+    </a>
+    @endif
     <h2 class="mx-4 mb-4 text-xl font-bold text-yellow-300">Cập nhật hồ sơ</h2>
     <form method="POST" action="{{ route('user.update', $user->id) }}" enctype="multipart/form-data">
         @csrf

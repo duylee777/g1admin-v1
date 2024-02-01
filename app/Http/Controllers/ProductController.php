@@ -200,6 +200,7 @@ class ProductController extends Controller
     {
         $product->specTypes()->detach();
         $product->delete();
+        ExtendProduct::where('product_id', $product->id)->delete();
         return redirect()->route('product.index')->with(['msg' => 'Xóa sản phẩm thành công !']);
     }
 

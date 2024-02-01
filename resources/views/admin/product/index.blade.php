@@ -40,11 +40,46 @@
                         <h2 class="text-black text-2xl font-semibold">Danh mục</h2>
                     </div>
                     <div class="flex flex-col flex-shrink-0 space-y-3 md:flex-row md:items-center lg:justify-end md:space-y-0 md:space-x-3">
+                    <div class="p-4">
+                
+                <div id="popup-modal" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                    <div class="relative p-4 w-full max-w-md max-h-full">
+                        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                            <button type="button" class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="popup-modal">
+                                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                                </svg>
+                                <span class="sr-only">Close modal</span>
+                            </button>
+                            <div class="p-4 md:p-5 text-center">
+                                <form action="{{ route('admin.import-products') }}" method="POST" enctype="multipart/form-data">
+                                    @csrf
+                                    <input type="file" name="file_import" id="file_import">
+                                    <button type="submit" class="text-green-400 px-4 py-2 rounded shadow">Nhập</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>      
+            </div>
                         <a href="{{ route('product.create') }}" type="button" class="flex items-center justify-center px-4 py-2 text-sm font-medium text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 ">
                             <svg class="h-3.5 w-3.5 mr-2" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                 <path clip-rule="evenodd" fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" />
                             </svg>
                             Thêm sản phẩm mới
+                        </a>
+                        
+                        <button type="button" data-modal-target="popup-modal" data-modal-toggle="popup-modal" class="flex items-center justify-center flex-shrink-0 px-3 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg focus:outline-none hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 ">
+                            <svg class="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 512 512" stroke-width="2" stroke="currentColor" aria-hidden="true">
+                                <path d="M128 64c0-35.3 28.7-64 64-64H352V128c0 17.7 14.3 32 32 32H512V448c0 35.3-28.7 64-64 64H192c-35.3 0-64-28.7-64-64V336H302.1l-39 39c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l80-80c9.4-9.4 9.4-24.6 0-33.9l-80-80c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l39 39H128V64zm0 224v48H24c-13.3 0-24-10.7-24-24s10.7-24 24-24H128zM512 128H384V0L512 128z"/>
+                            </svg>
+                            Nhập Excel
+                        </button>
+                        <a href="{{route('admin.export-products')}}" type="button" class="flex items-center justify-center flex-shrink-0 px-3 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg focus:outline-none hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 ">
+                            <svg class="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
+                            </svg>
+                            Xuất dữ liệu
                         </a>
                     </div>
                 </div>
@@ -71,9 +106,15 @@
                                 <td class="px-4 py-3">
                                     <?php 
                                         $listImage = json_decode($product->images);
+                                        
                                     ?>
+                                    
                                     <div class="flex items-center justify-center w-28 h-28 shadow rounded-lg overflow-hidden">
-                                        <img class="w-full" src="{{asset('../storage/products/'.$product->code.'/'.$listImage[0])}}" alt="">
+                                    @if($listImage == '')
+                                        <span>Chưa có hình ảnh</span>
+                                    @else
+                                        <img class="w-full" src="{{asset('../storage/products/'.$product->code.'/'.$listImage[0])}}" alt="{{ $product->name }}">
+                                    @endif
                                     </div>
                                 </td>
                                 <td class="px-4 py-3">{{ $product->code }}</td>

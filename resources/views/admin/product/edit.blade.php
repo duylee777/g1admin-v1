@@ -183,13 +183,21 @@
                         <div id="list-product-image" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                             <?php 
                                 $listProductImage = json_decode($product->images);
-                                $countImage = count($listProductImage);
+                                if($listProductImage != ""){
+                                    $countImage = count($listProductImage);
+                                }
+                                else {
+                                    $countImage = 0;
+                                }
+                                
                             ?>
+                            @if($countImage != 0)
                             @for($i = 0; $i < $countImage; $i++)
                                 <div class="flex items-center justify-center overflow-hidden bg-white p-4 rounded shadow h-60">
                                     <img src="{{asset('../storage/products/'.$product->code.'/'.$listProductImage[$i])}}" alt="ảnh sản phẩm" class="w-full rounded-lg">
                                 </div>
                             @endfor
+                            @endif
                         </div>
                         <div class="flex flex-col gap-2 mt-4">
                             <label class="block text-sm font-medium text-gray-900" for="file_input">Tải tập tin lên</label>
@@ -206,6 +214,15 @@
             </form>
         </div>
         <div class="hidden p-4 rounded-lg bg-gray-50" id="spec" role="tabpanel" aria-labelledby="spec-tab">
+
+            <div class="p-4">
+                <label for="">import excel</label>
+                <form action="{{ route('admin.import') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <input type="file" name="file_excel" id="file_excel">
+                    <button type="submit" class="text-green-400 px-4 py-2 rounded shadow">Nhập</button>
+                </form>
+            </div>
             <form method="POST" action="{{ route('product-spec.update', $product->id) }}" class="px-4" enctype="multipart/form-data">
             @csrf
             @method('PUT')
@@ -220,7 +237,9 @@
                                 </tr>
                             </thead>
                             <tbody>
+                            <?php //var_dump($product->specTypes); die; ?>
                                 @foreach($product->specTypes as $spec)
+                                
                                 @if($spec->category_id == $product->category_id)
                                 <tr class="bg-white border-b ">
                                     <th scope="row" class="px-6 py-2 font-medium text-gray-900 whitespace-nowrap border-r">
@@ -352,6 +371,7 @@
                 </div>
             </form>
         </div>
+        
     </div>
     <!--  -->
 

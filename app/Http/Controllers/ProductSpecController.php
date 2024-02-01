@@ -70,4 +70,8 @@ class ProductSpecController extends Controller
     {
         //
     }
+
+    public function import() {
+        echo "ok";
+    }
 }

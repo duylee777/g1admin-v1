@@ -13,8 +13,7 @@ class TagController extends Controller
      * Display a listing of the resource.
      */
     public function __construct() {
-        // $this->middleware('superadmin');
-        var_dump(Auth::check());die;
+    
     }
     
     public function index()

@@ -1,16 +1,67 @@
-<header class="header-area">
-        <div class="top-layer"></div>
-        <div class="mask__top">
-            <div class="header-wrap">
-                <div class="trademark">
-                    <a href="/" class="trademark__link">
-                        <div class="trademark__logo">
-                                <!-- <img src="assets/imgs/brands/phoenix.png" alt=""> -->
-                                <img src="{{ asset('assets/theme/imgs/logo/phoenixaudio_logo.png') }}" alt="">
-                        </div>
-                    </a>
+<style>
+    .v2h_cushion {
+        height: 154px;
+        /* background-color: var(--bg__grey--light); */
+        /* background-color: black; */
+    }
+    #header-v2 {
+        position: fixed;
+        top: 0;
+        z-index: 99;
+        width: 100%;
+        background-color: rgba(0,0,0,0.9);
+        padding-top: 0.5rem;
+    }
+    .v2h_wrap {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+    .v2h_trademark {
+        width: 6rem;
+    }
+    .v2h_content {
+        flex-grow: 1;
+    }
+    .v2h_line1 {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+    }
+    .v2h_line1 .v2h_mainmenu {
+        justify-content: space-between;
+    }
+    .v2h_line1 .v2h_searchbar {
+        
+    }
+    .v2h_line2 {
+        margin-top: 0.5rem;
+    }
+    .v2h_line2 .v2h_brands {
+        width: 100%;
+    }
+    .v2h_toggle-menu {
+        width: 12rem;
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+    }
+</style>
+<section class="v2h_cushion"></section>
+<header id="header-v2">
+    
+    <div class="containerx v2h_wrap">
+        <div class="v2h_trademark">
+            <a href="/" class="trademark__link">
+                <div class="trademark__logo">
+                        <!-- <img src="assets/imgs/brands/phoenix.png" alt=""> -->
+                        <img src="{{ asset('assets/theme/imgs/logo/phoenixaudio_logo.png') }}" alt="">
                 </div>
-                <nav class="mainmenu">
+            </a>
+        </div>
+        <div class="v2h_content">
+            <div class="v2h_line1">
+                <nav class="mainmenu v2h_mainmenu">
                     <a id="show-about" href="#" class="mainmenu__link">Giới thiệu</a>
                     <a href="{{ route('theme.project') }}" class="mainmenu__link">Dự án</a>
                     <a href="{{ route('theme.news') }}" class="mainmenu__link">Tin tức</a>
@@ -19,7 +70,7 @@
                     <a href="{{ route('theme.download') }}" class="mainmenu__link">Tải về</a>
                     <a href="{{ route('theme.contact') }}" class="mainmenu__link">Liên hệ</a>
                 </nav>
-                <div class="searchbar">
+                <div class="searchbar v2h_searchbar">
                     <form method="GET" action="{{ route('theme.search') }}">
                         <input type="text" name="keyword" placeholder="Nhập từ khóa bạn muốn tìm kiếm ...">
                         <button><i class="fa-solid fa-magnifying-glass"></i></button>
@@ -29,18 +80,7 @@
                     <div class="dropdown">
                         <button class="morewrap__btn dropdown-btn"><i class="fa-solid fa-globe"></i></button>
                         <div class="gtranslate_wrapper dropdown-menu"></div>
-                        <!-- <div class="dropdown-menu">
-                            <a href="#" class="dropdown-menu__link">English</a>
-                            <a href="#" class="dropdown-menu__link">Tiếng Việt</a>
-                        </div> -->
                     </div>
-                    <!-- <div class="dropdown">
-                        <button class="morewrap__btn dropdown-btn"><i class="fa-solid fa-circle-user"></i></button>
-                        <div class="dropdown-menu">
-                            <a href="#" class="dropdown-menu__link">Đăng nhập</a>
-                            <a href="#" class="dropdown-menu__link">Tạo tài khoản</a>
-                        </div>
-                    </div> -->
                     <button id="moreButton" class="morewrap__btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i class="fa-solid fa-bars"></i></button>
 
                     <div class="m-area offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
@@ -96,13 +136,8 @@
                     <!-- end test -->
                 </div>
             </div>
-        </div>
-        <div class="mask">
-            <div class="header-wrap header-wrap--gray">
-                <div class="toggle-menu">
-                    <button id="toggleMenuBtn"><i class="fa-solid fa-bars-staggered"></i> <span>sản phẩm</span></button>
-                </div>
-                <div class="brands">
+            <div class="v2h_line2">
+                <div class="brands v2h_brands">
                     <nav>
                         @if($headerBrands)
                             @foreach($headerBrands as $brand)
@@ -115,35 +150,42 @@
                     </nav>
                 </div>
             </div>
-            <div class="product-portfolio-toggle">
-                <ul class="product-portfolio">
-               
-                    @if($cates != null)
-                        @foreach($cates as $cate)
-                            @if($cate->parent_id == 11)
-                            <li class="product-wrap">
-                                <a href="{{ route('theme.category',$cate->slug) }}" class="product__link">{{$cate->name}}
-                                @if(count($cate->childs) != 0) 
-                                    <i class="fa-solid fa-angle-right"></i>
-                                @endif
-                                </a>
-                                @if(count($cate->childs) != 0) 
-                                    <ul class="sub-product-portfolio">
-                                        @foreach($cate->childs as $child)
-                                        <li class="sub-product-wrap">
-                                            <a href="" class="sub-product__link">{{$child->name}}</a>
-                                        </li>
-                                        @endforeach
-                                    </ul>
-                                @endif
-                            </li> 
+        </div>
+    </div>
+    <div class="v2h_category">
+        <div class="containerx toggle-menu v2h_toggle-menu">
+            <button id="toggleMenuBtn"><i class="fa-solid fa-bars-staggered"></i> <span>sản phẩm</span></button>
+        </div>
+        <div class="product-portfolio-toggle">
+            <ul class="product-portfolio">
+            
+                @if($cates != null)
+                    @foreach($cates as $cate)
+                        @if($cate->parent_id == 11)
+                        <li class="product-wrap">
+                            <a href="{{ route('theme.category',$cate->slug) }}" class="product__link">{{$cate->name}}
+                            @if(count($cate->childs) != 0) 
+                                <i class="fa-solid fa-angle-right"></i>
                             @endif
-                        @endforeach    
-                    @endif
-                    
-                </ul>
-            </div>
-            <section class="homeabout-area">
+                            </a>
+                            @if(count($cate->childs) != 0) 
+                                <ul class="sub-product-portfolio">
+                                    @foreach($cate->childs as $child)
+                                    <li class="sub-product-wrap">
+                                        <a href="" class="sub-product__link">{{$child->name}}</a>
+                                    </li>
+                                    @endforeach
+                                </ul>
+                            @endif
+                        </li> 
+                        @endif
+                    @endforeach    
+                @endif
+                
+            </ul>
+        </div>
+    </div>
+    <section class="homeabout-area">
                 <div class="homeabout-wrap">
                     <div class="homeabout">
                         <div class="homeabout-title">
@@ -158,8 +200,4 @@
                     </div>
                 </div>
             </section>
-        </div>
-    
-    </header>
-
-    
+</header>
